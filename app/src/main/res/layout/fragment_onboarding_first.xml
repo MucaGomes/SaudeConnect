@@ -33,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:textColor="#221F1F"
         android:fontFamily="@font/font_poppins"
         android:padding="25dp"
         android:text="Marque Consultas de forma mais prática"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_light"
     tools:context=".HomeLoginFragment">
 
     <ImageView
@@ -49,20 +50,20 @@
         app:layout_constraintStart_toStartOf="@+id/textView3"
         android:text="Login"
         android:background="@drawable/button_login"
-        android:id="@+id/btLogin"
+        android:id="@+id/btFromLogin"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:layout_width="250dp"
         android:layout_height="60dp"
-        android:id="@+id/btCadastro"
+        android:id="@+id/btFromCadastro"
         android:layout_marginTop="10dp"
         android:text="Criar Conta"
         android:textColor="@color/color_base"
-        app:layout_constraintEnd_toEndOf="@+id/btLogin"
-        app:layout_constraintStart_toStartOf="@+id/btLogin"
+        app:layout_constraintEnd_toEndOf="@+id/btFromLogin"
+        app:layout_constraintStart_toStartOf="@+id/btFromLogin"
         android:background="@drawable/buttom_register"
-        app:layout_constraintTop_toBottomOf="@+id/btLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/btFromLogin" />
 
 
 

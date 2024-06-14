@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_splashFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/onboardingFragment"
@@ -25,6 +28,12 @@
         <action
             android:id="@+id/action_onboardingFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_onboardingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_onboardingFragment_to_homeLoginFragment"
+            app:destination="@id/homeLoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -132,10 +141,32 @@
         <action
             android:id="@+id/action_loginFragment_to_singUpFragment"
             app:destination="@id/singUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/singUpFragment"
         android:name="com.saudeconnectapp.SingUpFragment"
         android:label="fragment_sing_up"
-        tools:layout="@layout/fragment_sing_up" />
+        tools:layout="@layout/fragment_sing_up" >
+        <action
+            android:id="@+id/action_singUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_singUpFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeLoginFragment"
+        android:name="com.saudeconnectapp.HomeLoginFragment"
+        android:label="fragment_home_login"
+        tools:layout="@layout/fragment_home_login" >
+        <action
+            android:id="@+id/action_homeLoginFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeLoginFragment_to_singUpFragment"
+            app:destination="@id/singUpFragment" />
+    </fragment>
 </navigation>

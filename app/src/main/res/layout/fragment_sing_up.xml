@@ -9,6 +9,7 @@
     tools:context=".SingUpFragment">
 
     <ImageView
+        android:id="@+id/imgBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="left"
@@ -59,10 +60,12 @@
         app:boxCornerRadiusTopStart="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEditName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_login"
             android:backgroundTint="#EEEDED"
+            android:textColor="#000000"
             android:maxLines="1"
             android:textSize="10sp" />
 
@@ -93,9 +96,12 @@
         app:boxCornerRadiusTopStart="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEditEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_login"
+            android:textColor="#000000"
+            android:inputType="textEmailAddress"
             android:backgroundTint="#EEEDED"
             android:maxLines="1"
             android:textSize="10sp" />
@@ -133,16 +139,18 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtEditPassword"
                 android:layout_width="match_parent"
-                android:inputType="textPassword"
                 android:layout_height="match_parent"
                 android:background="@drawable/button_login"
+                android:textColor="#000000"
                 android:backgroundTint="#EEEDED"
+                android:inputType="textPassword"
                 android:maxLines="1" />
 
             <ImageView
                 android:id="@+id/imageViewShowPassword"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:textSize="10sp"
                 android:layout_marginEnd="10dp"
                 android:src="@drawable/hide_password"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -153,8 +161,6 @@
 
 
     </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
     <TextView
@@ -181,9 +187,12 @@
         app:boxCornerRadiusTopStart="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEditCPF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_login"
+            android:textColor="#000000"
+            android:inputType="number"
             android:backgroundTint="#EEEDED"
             android:maxLines="1"
             android:textSize="10sp" />
@@ -204,32 +213,31 @@
         android:textStyle="bold" />
 
 
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        app:boxBackgroundMode="outline"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp">
+        android:layout_marginStart="30dp"
+        android:background="@drawable/button_login"
+        android:backgroundTint="#EEEDED">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_login"
-            android:backgroundTint="#EEEDED"
-            android:maxLines="1"
-            android:textSize="10sp" />
-
-
-    </com.google.android.material.textfield.TextInputLayout>
+            android:id="@+id/txtEditNasc"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            android:text=""/>
+    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -240,7 +248,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/open_sans"
                 android:text="Cidade"
@@ -252,7 +259,6 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="10dp"
@@ -261,9 +267,11 @@
                 app:boxCornerRadiusTopStart="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtEditCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_login"
+                    android:textColor="#000000"
                     android:backgroundTint="#EEEDED"
                     android:maxLines="1"
                     android:textSize="10sp" />
@@ -282,7 +290,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/open_sans"
                 android:text="UF"
@@ -294,16 +301,17 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                app:boxBackgroundMode="outline"
                 android:layout_gravity="center"
-                app:boxCornerRadiusBottomEnd="30dp"
+                app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopStart="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtEditUF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_login"
+                    android:textColor="#000000"
                     android:backgroundTint="#EEEDED"
                     android:maxLines="1"
                     android:textSize="10sp" />
@@ -319,11 +327,11 @@
 
 
     <Button
-        android:id="@+id/btLogin"
+        android:id="@+id/btSingUp"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/button_login_grad"
         android:text="Cadastre-se"
         android:textColor="#FFFF"

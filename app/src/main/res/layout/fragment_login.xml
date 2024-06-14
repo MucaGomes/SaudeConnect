@@ -12,6 +12,7 @@
         android:layout_width="300dp"
         android:layout_height="250dp"
         android:layout_gravity="center"
+        android:layout_margin="10dp"
         android:src="@drawable/logotipo_slogan" />
 
     <TextView
@@ -47,12 +48,13 @@
         app:boxCornerRadiusTopStart="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
             android:id="@+id/txtEditEmail"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_login"
             android:backgroundTint="#EEEDED"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColor="#000000" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -89,15 +91,16 @@
                 android:layout_width="match_parent"
                 android:inputType="textPassword"
                 android:layout_height="match_parent"
+                android:textColor="#000000"
                 android:background="@drawable/button_login"
                 android:backgroundTint="#EEEDED"
                 android:maxLines="1" />
 
             <ImageView
                 android:id="@+id/imageViewShowPassword"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="10dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="15dp"
                 android:src="@drawable/hide_password"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/txtEditPassword"
@@ -112,7 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/open_sans"
         android:shadowColor="#000000"
         android:shadowDx="1"
@@ -161,7 +164,7 @@
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/button_login_grad"
         android:text="Entrar"
         android:textColor="#FFFF"

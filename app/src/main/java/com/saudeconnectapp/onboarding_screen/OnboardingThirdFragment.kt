@@ -13,7 +13,7 @@ import com.saudeconnectapp.databinding.FragmentOnboardingThirdBinding
 
 class OnboardingThirdFragment : Fragment() {
 
-    private lateinit var binding : FragmentOnboardingThirdBinding
+    private lateinit var binding: FragmentOnboardingThirdBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,8 +24,8 @@ class OnboardingThirdFragment : Fragment() {
 
         val finish = binding.txtFinish
 
-        finish.setOnClickListener{
-            findNavController().navigate(R.id.action_onboardingFragment_to_mainFragment)
+        finish.setOnClickListener {
+            findNavController().navigate(R.id.action_onboardingFragment_to_homeLoginFragment)
             onBoardingFinished()
         }
 
@@ -34,7 +34,8 @@ class OnboardingThirdFragment : Fragment() {
 
     private fun onBoardingFinished() {
 
-        val sharedPreferences = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
+        val sharedPreferences =
+            requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 
         editor.putBoolean("finished", true)

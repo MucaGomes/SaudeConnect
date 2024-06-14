@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
 import com.saudeconnectapp.R
 import com.saudeconnectapp.databinding.FragmentMainBinding
 
@@ -12,7 +13,6 @@ import com.saudeconnectapp.databinding.FragmentMainBinding
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

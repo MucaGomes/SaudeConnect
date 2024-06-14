@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    // Add the Google services Gradle plugin
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -54,6 +56,9 @@ dependencies {
 
     // google firebase auth
     implementation("com.google.firebase:firebase-auth:23.0.0")
+
+    // google firestore
+    implementation ("com.google.firebase:firebase-firestore:25.0.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -20,6 +20,7 @@
         android:textColor="#A1A8B0"
         android:textSize="17sp" />
 
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="310dp"
@@ -32,13 +33,13 @@
         android:id="@+id/txtOb1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#221F1F"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/font_poppins"
         android:padding="25dp"
         android:text="Encontre seus medicamentos perto de você"
         android:textSize="22sp"
-        android:textStyle="bold"/>
-
+        android:textStyle="bold" />
 
 
 </LinearLayout>
