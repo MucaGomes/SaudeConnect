@@ -34,4 +34,6 @@ class HomeLoginFragment : Fragment() {
         return binding.root
     }
 
+
+
 }

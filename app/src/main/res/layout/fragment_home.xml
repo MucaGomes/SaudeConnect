@@ -49,68 +49,50 @@
 
     </GridLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewTop"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvlCarrossel"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_margin="15dp"
-        android:backgroundTint="@color/color_base"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="20dp">
+        android:layout_height="200dp"
+        android:overScrollMode="never" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
-                android:layout_width="250dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/open_sans"
+            android:text="Guias de Saúde"
+            android:textColor="#003049"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="Encontre Médicos para Telemedicina de Forma Rápida e Fácil"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/open_sans"
+            android:text="Ver tudo"
+            android:textColor="@color/color_base"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="18dp"
-                    android:backgroundTint="@color/red"
-                    android:fontFamily="@font/poppins"
-                    android:textSize="12sp"
-                    android:text="Marque uma consulta!"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:src="@drawable/image_top_info"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.cardview.widget.CardView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvlCarrosselBot"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:overScrollMode="never" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
