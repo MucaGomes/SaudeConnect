@@ -55,6 +55,9 @@
         android:layout_height="200dp"
         android:overScrollMode="never" />
 
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_marginTop="50dp"
@@ -91,8 +94,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvlCarrosselBot"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:overScrollMode="never" />
+
+
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

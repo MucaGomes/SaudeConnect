@@ -3,8 +3,8 @@
     android:layout_width="280dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="20dp"
-    android:elevation="20dp"
-    android:backgroundTint="@color/color_light"
+    android:layout_margin="10dp"
+    android:backgroundTint="@color/white"
     android:layout_height="250dp">
 
 
@@ -16,11 +16,12 @@
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="280dp"
-            android:layout_height="190dp"
-            android:scaleType="fitXY"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/img_carrossel_bot_2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"

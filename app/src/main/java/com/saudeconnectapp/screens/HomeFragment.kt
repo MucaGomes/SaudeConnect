@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.app.clonemercadolivre.adapter.CardAdapter
 import com.app.clonemercadolivre.adapter.com.saudeconnectapp.CardAdapterBot
 import com.app.clonemercadolivre.adapter.com.saudeconnectapp.model.CarrosselBot
@@ -39,6 +42,8 @@ class HomeFragment : Fragment() {
         navigationScreens(btNavb)
 
         setupRecyclerViewCarroselBot()
+
+
 
         return binding.root
 
@@ -89,26 +94,26 @@ class HomeFragment : Fragment() {
 
     private fun getCardsCarrosel() {
         val cardOne = CarroselTop(
-            R.id.txtCardOne.toString(), R.id.btnGoOne, R.drawable.image_top_info
+            "Encontre Médicos para Telemedicina de Forma Rápida e Fácil", R.id.btnGoOne, R.drawable.image_top_info
         )
 
         listaCarrosselTop.add(cardOne)
 
         val cardTwo = CarroselTop(
-            R.id.txtCardTwo.toString(), R.id.btnGoTwo, R.drawable.farmacia_image
+            "Econtre farmácias próximas de você com os melhores preços", R.id.btnGoTwo, R.drawable.farmacia_image
         )
         listaCarrosselTop.add(cardTwo)
     }
 
     private fun getCardsCarroselBot() {
         val cardOne = CarrosselBot(
-            R.id.txtCardBotOne.toString(), R.drawable.img_carrossel_bot_1
+            "Exercícios para Aliviar a Ansiedade", R.drawable.img_carrossel_bot_1
         )
 
         listaCarrosselBot.add(cardOne)
 
         val cardTwo = CarrosselBot(
-            R.id.txtCardBotTwo.toString(), R.drawable.img_carrossel_bot_2
+            "Check-ups Médicos: Quando e Por Que", R.drawable.img_carrossel_bot_2
         )
 
         listaCarrosselBot.add(cardTwo)
