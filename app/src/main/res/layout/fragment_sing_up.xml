@@ -298,26 +298,19 @@
                 android:textStyle="bold" />
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="150dp"
+            <Spinner
+                android:id="@+id/spinnerUF"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_gravity="center"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopStart="10dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtEditUF"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_login"
-                    android:textColor="#000000"
-                    android:backgroundTint="#EEEDED"
-                    android:maxLines="1"
-                    android:textSize="10sp" />
+                android:padding="10dp"
+                android:hint="Selecione o estado"
+                android:background="@drawable/button_login"
+                android:textColor="#000000"
+                android:backgroundTint="#EEEDED"
+                android:maxLines="1"
+                android:textSize="10sp" />
 
 
-            </com.google.android.material.textfield.TextInputLayout>
 
 
         </LinearLayout>

@@ -24,7 +24,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/backToPerfil"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="10dp"
@@ -45,7 +45,7 @@
                 android:textSize="24dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/backToPerfil"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -83,6 +83,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Alterar Foto"
+                        android:id="@+id/txtAlterarFoto"
                         android:textColor="@color/red"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -106,6 +107,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="20dp"
+            android:id="@+id/cardAlterarSenha"
             android:backgroundTint="#FACAC4"
             app:cardCornerRadius="35dp">
 
@@ -155,6 +157,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:id="@+id/cardEditarDados"
             android:backgroundTint="#FACAC4"
             app:cardCornerRadius="35dp">
 
@@ -205,6 +208,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:backgroundTint="#FACAC4"
+            android:id="@+id/cardInfosClinicas"
             app:cardCornerRadius="35dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -254,6 +258,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:id="@+id/cardCarteiraConvenio"
             android:backgroundTint="#FACAC4"
             app:cardCornerRadius="35dp">
 
@@ -303,6 +308,7 @@
             android:layout_height="60dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:id="@+id/cardCns"
             android:layout_marginEnd="20dp"
             android:backgroundTint="#FACAC4"
             app:cardCornerRadius="35dp">
@@ -352,10 +358,12 @@
         <Button
             android:layout_width="121dp"
             android:layout_height="50dp"
+            android:id="@+id/btnSalvar"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:textColor="#003049"
             android:backgroundTint="#FACAC4"
-            android:text="Salvar"
+            android:text="Salvar"/>
 
 
     </LinearLayout>

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.ir.backend.js.compile
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -53,6 +55,13 @@ dependencies {
 
     // dots indicator page
     implementation("com.tbuonomo:dotsindicator:5.0")
+
+    // blur
+    implementation ("jp.wasabeef:blurry:4.0.1")
+
+    // google firebase messages
+    implementation ("com.google.firebase:firebase-messaging:24.0.0")
+
 
     // google firebase auth
     implementation("com.google.firebase:firebase-auth:23.0.0")

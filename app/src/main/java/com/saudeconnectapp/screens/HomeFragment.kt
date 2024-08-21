@@ -14,9 +14,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.MetadataChanges
+import com.saudeconnectapp.NotificationBottomSheetDialogFragment
 import com.saudeconnectapp.R
 import com.saudeconnectapp.databinding.FragmentHomeBinding
 import com.saudeconnectapp.model.CarrosselTop
+import jp.wasabeef.blurry.Blurry
 
 
 @Suppress("UNUSED_EXPRESSION")
@@ -44,6 +46,19 @@ class HomeFragment : Fragment() {
         navigationScreens(btNavb)
 
         setupRecyclerViewCarroselBot()
+
+        val notificationIcon = binding.notificationIcon
+
+        notificationIcon.setOnClickListener {
+            Blurry.with(context)
+                .radius(10) // Define a intensidade do desfoque
+                .sampling(2) // Ajuste para performance e qualidade
+                .async() // Executa a operação de desfoque em uma thread separada
+                .onto(binding.backgroundView)
+
+            val bottomSheet = NotificationBottomSheetDialogFragment()
+            bottomSheet.show(parentFragmentManager, "NotificationBottomSheet")
+        }
 
 
 

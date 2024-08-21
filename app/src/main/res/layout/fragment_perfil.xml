@@ -7,14 +7,139 @@
     android:background="@color/color_light"
     tools:context=".screens.PerfilFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Perfil"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:background="@drawable/fundo_acard"
+        android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/open_sans"
+                android:text="Perfil"
+                android:textColor="#003049"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <GridLayout
+                android:id="@+id/gridLayout"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="25dp"
+                    android:src="@drawable/avatar" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/nameUser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans"
+                        android:text="Maria Elena"
+                        android:textColor="#003049"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/emailUser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:textColor="#003049" />
+                </LinearLayout>
+
+            </GridLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gridLayout">
+
+                <Button
+                    android:id="@+id/btnGoEditPerfil"
+                    android:layout_width="110dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:backgroundTint="@color/red"
+                    android:text="Editar Perfil"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/btnPrivacidade"
+                    android:layout_width="110dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:backgroundTint="@color/red"
+                    android:text="Privacidade"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/btnLogoff"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/red"
+                    android:text="Sair"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#003049"
+        android:fontFamily="@font/open_sans"
+        android:text="O que você deseja Salvar?"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -29,5 +154,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvlCarrosselPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:overScrollMode="never"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

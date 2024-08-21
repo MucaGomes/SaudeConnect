@@ -22,6 +22,10 @@ class EditPerfilFragment : Fragment() {
         // Inflate the layout for this fragment
         binding =  FragmentEditPerfilBinding.inflate(layoutInflater, container, false)
 
+        binding.backToPerfil.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         return binding.root
     }
 

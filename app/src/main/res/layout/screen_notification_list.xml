@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/color_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/font_poppins"
+            android:text="Notificações"
+            android:textSize="20sp"
+            android:textColor="@color/colo_dark_blue" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alignmentMode="alignMargins"
+            android:columnCount="3"
+            android:layout_gravity="center"
+            android:rowCount="1"
+            android:rowOrderPreserved="false"
+            android:useDefaultMargins="true"
+            android:layout_marginBottom="16dp">
+
+            <!-- Cartão 1 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="10dp"
+                android:backgroundTint="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:fontFamily="@font/open_sans"
+                    android:text="Todos"
+                    android:textColor="@color/colo_dark_blue" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Cartão 2 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="10dp"
+                android:backgroundTint="@color/red">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:fontFamily="@font/open_sans"
+                    android:text="Não Lidas"
+                    android:textColor="@color/white" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Cartão 3 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="10dp"
+                android:backgroundTint="@color/color_base">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="8dp"
+                    android:fontFamily="@font/open_sans"
+                    android:text="Lidas"
+                    android:textColor="@color/white" />
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
+            android:layout_height="350dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                tools:listitem="@layout/item_card_notification"
+                tools:itemCount="5"
+                android:layout_height="match_parent"/>
+
+        </ScrollView>
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/image_screen_notification" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
