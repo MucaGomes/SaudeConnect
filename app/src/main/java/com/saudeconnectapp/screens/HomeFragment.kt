@@ -6,18 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import com.app.clonemercadolivre.adapter.CardAdapter
-import com.app.clonemercadolivre.adapter.com.saudeconnectapp.CardAdapterBot
+import com.saudeconnectapp.adapters.CardAdapter
+import com.saudeconnectapp.adapters.CardAdapterBot
 import com.app.clonemercadolivre.adapter.com.saudeconnectapp.model.CarrosselBot
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.MetadataChanges
 import com.saudeconnectapp.R
 import com.saudeconnectapp.databinding.FragmentHomeBinding
-import com.saudeconnectapp.model.CarroselTop
+import com.saudeconnectapp.model.CarrosselTop
 
 
 @Suppress("UNUSED_EXPRESSION")
@@ -27,8 +26,11 @@ class HomeFragment : Fragment() {
     private lateinit var carroselAdapter: CardAdapter
     private lateinit var carroselBotAdapter: CardAdapterBot
 
-    private val listaCarrosselTop: MutableList<CarroselTop> = mutableListOf()
+    private val listaCarrosselTop: MutableList<CarrosselTop> = mutableListOf()
     private val listaCarrosselBot: MutableList<CarrosselBot> = mutableListOf()
+
+    private val usuarioId = FirebaseAuth.getInstance().currentUser!!.uid
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -93,14 +95,18 @@ class HomeFragment : Fragment() {
 
 
     private fun getCardsCarrosel() {
-        val cardOne = CarroselTop(
-            "Encontre Médicos para Telemedicina de Forma Rápida e Fácil", R.id.btnGoOne, R.drawable.image_top_info
+        val cardOne = CarrosselTop(
+            "Encontre Médicos para Telemedicina de Forma Rápida e Fácil",
+            R.id.btnGoOne,
+            R.drawable.image_top_info
         )
 
         listaCarrosselTop.add(cardOne)
 
-        val cardTwo = CarroselTop(
-            "Econtre farmácias próximas de você com os melhores preços", R.id.btnGoTwo, R.drawable.farmacia_image
+        val cardTwo = CarrosselTop(
+            "Econtre farmácias próximas de você com os melhores preços",
+            R.id.btnGoTwo,
+            R.drawable.farmacia_image
         )
         listaCarrosselTop.add(cardTwo)
     }
@@ -119,4 +125,16 @@ class HomeFragment : Fragment() {
         listaCarrosselBot.add(cardTwo)
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        val documentRef = db.collection("Usuários").document(usuarioId)
+
+        documentRef.addSnapshotListener(MetadataChanges.INCLUDE) { snapshot, e ->
+            if (snapshot != null) {
+                binding.nameUserHome.text = snapshot.getString("nome")
+            }
+
+        }
+    }
 }

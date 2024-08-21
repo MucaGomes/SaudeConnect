@@ -1,6 +1,6 @@
 package com.saudeconnectapp.model
 
-data class CarroselTop(
+data class CarrosselTop(
     val title: String? = null,
     val btn: Int? = null,
     val img: Int? = null

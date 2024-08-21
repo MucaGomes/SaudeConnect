@@ -5,17 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.saudeconnectapp.R
+import com.saudeconnectapp.databinding.FragmentEditPerfilBinding
 
 class EditPerfilFragment : Fragment() {
 
+
+    private lateinit var binding : FragmentEditPerfilBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_perfil, container, false)
+        binding =  FragmentEditPerfilBinding.inflate(layoutInflater, container, false)
+
+        return binding.root
     }
 
 

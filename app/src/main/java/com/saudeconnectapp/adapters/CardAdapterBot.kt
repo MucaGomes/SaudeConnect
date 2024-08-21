@@ -1,14 +1,12 @@
-package com.app.clonemercadolivre.adapter.com.saudeconnectapp
+package com.saudeconnectapp.adapters
 
 import android.content.Context
-import android.graphics.Matrix
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.clonemercadolivre.adapter.com.saudeconnectapp.model.CarrosselBot
 import com.saudeconnectapp.databinding.ItemCardCarroselBotOneBinding
-import com.saudeconnectapp.databinding.ItemCardCarrosselTopOneBinding
 
 class CardAdapterBot(
     private val context: Context, val listaCarrosselBot: MutableList<CarrosselBot>

@@ -1,4 +1,4 @@
-package com.app.clonemercadolivre.adapter
+package com.saudeconnectapp.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.saudeconnectapp.databinding.ItemCardCarrosselTopOneBinding
-import com.saudeconnectapp.model.CarroselTop
+import com.saudeconnectapp.model.CarrosselTop
 
 
 
 
 class CardAdapter(
-    private val context: Context, val listaCarrosselTop: MutableList<CarroselTop>
+    private val context: Context, val listaCarrosselTop: MutableList<CarrosselTop>
 ) : RecyclerView.Adapter<CardAdapter.ProdutoCarroselViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProdutoCarroselViewHolder {

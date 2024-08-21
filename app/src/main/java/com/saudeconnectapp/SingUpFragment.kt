@@ -9,9 +9,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat
@@ -64,8 +67,43 @@ class SingUpFragment : Fragment() {
 
         // função que faz voltar a tela de login
         btBack.setOnClickListener {
-            findNavController().navigate(R.id.action_singUpFragment_to_loginFragment)
+                findNavController().navigate(R.id.action_singUpFragment_to_loginFragment)
         }
+
+        val spinnerUF: Spinner = binding.spinnerUF
+        val ufs = listOf(
+            "Acre (AC)",
+            "Alagoas (AL)",
+            "Amapá (AP)",
+            "Amazonas (AM)",
+            "Bahia (BA)",
+            "Ceará (CE)",
+            "Distrito Federal (DF)",
+            "Espírito Santo (ES)",
+            "Goiás (GO)",
+            "Maranhão (MA)",
+            "Mato Grosso (MT)",
+            "Mato Grosso do Sul (MS)",
+            "Minas Gerais (MG)",
+            "Pará (PA)",
+            "Paraíba (PB)",
+            "Paraná (PR)",
+            "Pernambuco (PE)",
+            "Piauí (PI)",
+            "Rio de Janeiro (RJ)",
+            "Rio Grande do Norte (RN)",
+            "Rio Grande do Sul (RS)",
+            "Rondônia (RO)",
+            "Roraima (RR)",
+            "Santa Catarina (SC)",
+            "São Paulo (SP)",
+            "Sergipe (SE)",
+            "Tocantins (TO)"
+        )
+
+        val adapter = context?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, ufs) }
+        adapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerUF.adapter = adapter
 
         return binding.root
     }
@@ -77,11 +115,11 @@ class SingUpFragment : Fragment() {
             val pass = binding.txtEditPassword.text.toString()
             val cpf = binding.txtEditCPF.text.toString()
             val city = binding.txtEditCity.text.toString()
-            val uf = binding.txtEditUF.text.toString()
+            val uf = binding.spinnerUF.selectedItem
             val nasc = binding.txtEditNasc.text.toString()
             val name = binding.txtEditName.text.toString()
 
-            if (email.isNotEmpty() && pass.isNotEmpty() && cpf.isNotEmpty() && city.isNotEmpty() && uf.isNotEmpty() && uf.isNotEmpty() && nasc.isNotEmpty() && name.isNotEmpty()) {
+            if (email.isNotEmpty() && pass.isNotEmpty() && cpf.isNotEmpty() && city.isNotEmpty() && nasc.isNotEmpty() && name.isNotEmpty()) {
                 firebaseAuth.createUserWithEmailAndPassword(email, pass)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -114,7 +152,6 @@ class SingUpFragment : Fragment() {
                             binding.txtEditName.setText("")
                             binding.txtEditNasc.setText("")
                             binding.txtEditPassword.setText("")
-                            binding.txtEditUF.setText("")
 
                             findNavController().navigate(R.id.action_singUpFragment_to_loginFragment)
 

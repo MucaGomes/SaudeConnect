@@ -38,7 +38,7 @@ class SplashFragment : Fragment() {
                     findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
                 } else {
                     // Usuário não está logado, navegar para LoginFragment
-                    findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                    findNavController().navigate(R.id.action_splashFragment_to_homeLoginFragment)
                 }
             } else {
                 // Usuário não finalizou o onboarding, navegar para OnboardingFragment
