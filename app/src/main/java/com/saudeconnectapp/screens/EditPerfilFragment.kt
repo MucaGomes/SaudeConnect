@@ -26,6 +26,10 @@ class EditPerfilFragment : Fragment() {
             findNavController().popBackStack()
         }
 
+        binding.txtAlterarFoto.setOnClickListener {
+            findNavController().navigate(R.id.action_editPerfilFragment_to_sendPictureFragment)
+        }
+
         return binding.root
     }
 

@@ -9,7 +9,9 @@ import com.app.clonemercadolivre.adapter.com.saudeconnectapp.model.CarrosselBot
 import com.saudeconnectapp.databinding.ItemCardCarroselBotOneBinding
 
 class CardAdapterBot(
-    private val context: Context, val listaCarrosselBot: MutableList<CarrosselBot>
+    private val context: Context,
+    val listaCarrosselBot: MutableList<CarrosselBot>,
+    private val onItemClick: (String) -> Unit // Função para tratar cliques
 ) : RecyclerView.Adapter<CardAdapterBot.ProdutoCarroselViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProdutoCarroselViewHolder {
@@ -30,6 +32,15 @@ class CardAdapterBot(
             holder.img.scaleType = ImageView.ScaleType.CENTER_CROP
         }
 
+        holder.itemView.setOnClickListener{
+            when (position){
+                0->
+                    onItemClick("https://marjan.com.br/blog/5-exercicios-para-controlar-a-ansiedade/")
+                1->
+                    onItemClick("https://blog.sabin.com.br/autocuidado/exames-indicados-para-o-seu-check-up/")
+            }
+        }
+
     }
 
     override fun getItemCount() = listaCarrosselBot.size
@@ -38,5 +49,7 @@ class CardAdapterBot(
         RecyclerView.ViewHolder(binding.root) {
         val title = binding.txtCardBotOne
         val img = binding.imageView3
+
+
     }
 }

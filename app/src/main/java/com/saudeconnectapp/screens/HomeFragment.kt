@@ -16,6 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.MetadataChanges
 import com.saudeconnectapp.NotificationBottomSheetDialogFragment
 import com.saudeconnectapp.R
+import com.saudeconnectapp.WebViewFragment
 import com.saudeconnectapp.databinding.FragmentHomeBinding
 import com.saudeconnectapp.model.CarrosselTop
 import jp.wasabeef.blurry.Blurry
@@ -103,7 +104,21 @@ class HomeFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewProdutosCarrosel.setHasFixedSize(true)
 
-        carroselBotAdapter = context?.let { CardAdapterBot(it, listaCarrosselBot) }!!
+        carroselBotAdapter = context?.let {
+            CardAdapterBot(it, listaCarrosselBot) { url ->
+                // Navegar para o WebViewFragment ao clicar no item
+                val fragment = WebViewFragment()
+                val bundle = Bundle()
+                bundle.putString("url", url)
+                fragment.arguments = bundle
+
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }!!
+
         recyclerViewProdutosCarrosel.adapter = carroselBotAdapter
         getCardsCarroselBot()
     }
