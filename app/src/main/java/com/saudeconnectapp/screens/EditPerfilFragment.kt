@@ -42,8 +42,6 @@ class EditPerfilFragment : Fragment() {
     private val usuarioId = FirebaseAuth.getInstance().currentUser!!.uid
     private lateinit var db: FirebaseFirestore
 
-    private val STORAGE_PERMISSION_CODE = 100
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -100,37 +98,6 @@ class EditPerfilFragment : Fragment() {
         return binding.root
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == STORAGE_PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permissão concedida
-                Toast.makeText(
-                    requireContext(), "Permissão de armazenamento concedida", Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                // Permissão negada
-                Toast.makeText(
-                    requireContext(), "Permissão de armazenamento negada", Toast.LENGTH_SHORT
-                ).show()
-                // Opção para redirecionar o usuário para as configurações, se necessário
-                showPermissionDeniedDialog()
-            }
-        }
-    }
-
-    private fun showPermissionDeniedDialog() {
-        AlertDialog.Builder(requireContext()).setTitle("Permissão Necessária")
-            .setMessage("A permissão de armazenamento é necessária para acessar este recurso. Por favor, vá para as configurações e conceda a permissão.")
-            .setPositiveButton("Configurações") { _, _ ->
-                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                val uri = Uri.fromParts("package", requireActivity().packageName, null)
-                intent.data = uri
-                startActivity(intent)
-            }.setNegativeButton("Cancelar", null).show()
-    }
 
 
     private fun openGallery() {

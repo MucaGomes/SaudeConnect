@@ -1,17 +1,25 @@
 package com.saudeconnectapp.screens_send_picture
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.MetadataChanges
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.saudeconnectapp.R
@@ -24,6 +32,8 @@ class SendPictureFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var storage: FirebaseStorage
     private lateinit var db: FirebaseFirestore
+
+    private val STORAGE_PERMISSION_CODE = 100
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -42,6 +52,7 @@ class SendPictureFragment : Fragment() {
             savePhoto()
         }
 
+
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when (position) {
                 0 -> tab.text = "Foto de Perfil"
@@ -52,6 +63,66 @@ class SendPictureFragment : Fragment() {
 
         return binding.root
     }
+
+    override fun onStart() {
+        super.onStart()
+        checkStoragePermission()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permissão concedida
+                Toast.makeText(
+                    requireContext(),
+                    "Permissão de armazenamento concedida",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                // Permissão negada
+                Toast.makeText(
+                    requireContext(),
+                    "Permissão de armazenamento negada",
+                    Toast.LENGTH_SHORT
+                ).show()
+                showPermissionDeniedDialog()
+            }
+        }
+    }
+
+    private fun checkStoragePermission() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            // Permissão já concedida
+            Log.d("SendPictureFragment", "Permissão de armazenamento já concedida")
+        } else {
+            // Solicitar permissão
+            requestPermissions(
+                arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                STORAGE_PERMISSION_CODE
+            )
+        }
+    }
+
+    private fun showPermissionDeniedDialog() {
+        AlertDialog.Builder(requireContext()).setTitle("Permissão Necessária")
+            .setMessage("A permissão de armazenamento é necessária para acessar este recurso. Por favor, vá para as configurações e conceda a permissão.")
+            .setPositiveButton("Configurações") { _, _ ->
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val uri = Uri.fromParts("package", requireActivity().packageName, null)
+                intent.data = uri
+                startActivity(intent)
+            }.setNegativeButton("Cancelar", null).show()
+    }
+
 
     private fun savePhoto() {
         val userId = auth.currentUser?.uid ?: return
@@ -71,42 +142,42 @@ class SendPictureFragment : Fragment() {
         uriPerfil?.let { uri ->
             val perfilRef = storageRef.child("fotosPerfil/$userId/perfil.jpg")
             val uploadTask = perfilRef.putFile(uri).addOnSuccessListener {
-                    perfilRef.downloadUrl.addOnSuccessListener { url ->
-                        salvarUrlNoFirestore(url.toString(), "fotoPerfilUrl")
-                    }.addOnFailureListener { exception ->
-                        Log.e(
-                            "Firebase", "Erro ao obter URL da foto de perfil: ${exception.message}"
-                        )
-                    }
+                perfilRef.downloadUrl.addOnSuccessListener { url ->
+                    salvarUrlNoFirestore(url.toString(), "fotoPerfilUrl")
                 }.addOnFailureListener { exception ->
                     Log.e(
-                        "Firebase", "Erro ao fazer upload da foto de perfil: ${exception.message}"
+                        "Firebase", "Erro ao obter URL da foto de perfil: ${exception.message}"
                     )
                 }
+            }.addOnFailureListener { exception ->
+                Log.e(
+                    "Firebase", "Erro ao fazer upload da foto de perfil: ${exception.message}"
+                )
+            }
             uploadTasks.add(uploadTask)
         }
 
         uriSus?.let { uri ->
             val susRef = storageRef.child("fotosSus/$userId/sus.jpg")
             val uploadTask = susRef.putFile(uri).addOnSuccessListener {
-                    susRef.downloadUrl.addOnSuccessListener { url ->
-                        salvarUrlNoFirestore(url.toString(), "fotoSusUrl")
-                    }
-                }.addOnFailureListener {
-                    Log.e("Upload Error", "Erro ao fazer upload do cartão SUS", it)
+                susRef.downloadUrl.addOnSuccessListener { url ->
+                    salvarUrlNoFirestore(url.toString(), "fotoSusUrl")
                 }
+            }.addOnFailureListener {
+                Log.e("Upload Error", "Erro ao fazer upload do cartão SUS", it)
+            }
             uploadTasks.add(uploadTask)
         }
 
         uriCardVac?.let { uri ->
             val cardVacRef = storageRef.child("fotosCardVaccination/$userId/vaccination.jpg")
             val uploadTask = cardVacRef.putFile(uri).addOnSuccessListener {
-                    cardVacRef.downloadUrl.addOnSuccessListener { url ->
-                        salvarUrlNoFirestore(url.toString(), "fotoCardVacUrl")
-                    }
-                }.addOnFailureListener {
-                    Log.e("Upload Error", "Erro ao fazer upload do cartão de vacinação", it)
+                cardVacRef.downloadUrl.addOnSuccessListener { url ->
+                    salvarUrlNoFirestore(url.toString(), "fotoCardVacUrl")
                 }
+            }.addOnFailureListener {
+                Log.e("Upload Error", "Erro ao fazer upload do cartão de vacinação", it)
+            }
             uploadTasks.add(uploadTask)
         }
 

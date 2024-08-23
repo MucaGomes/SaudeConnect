@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context=".screens_send_picture.SendPictureFragment">
 
-
     <!-- ViewPager2 -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -35,6 +34,5 @@
         android:background="@drawable/button_login"
         android:text="Concluir"
         android:textColor="@android:color/white" />
-
 
 </LinearLayout>
