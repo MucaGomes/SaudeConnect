@@ -13,25 +13,27 @@ import com.saudeconnectapp.databinding.FragmentEditPerfilBinding
 class EditPerfilFragment : Fragment() {
 
 
-    private lateinit var binding : FragmentEditPerfilBinding
+    private lateinit var binding: FragmentEditPerfilBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding =  FragmentEditPerfilBinding.inflate(layoutInflater, container, false)
-
-        binding.backToPerfil.setOnClickListener {
-            findNavController().popBackStack()
-        }
+        binding = FragmentEditPerfilBinding.inflate(layoutInflater, container, false)
 
         binding.txtAlterarFoto.setOnClickListener {
-            findNavController().navigate(R.id.action_editPerfilFragment_to_sendPictureFragment)
+
         }
 
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.backToPerfil.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
 
 }

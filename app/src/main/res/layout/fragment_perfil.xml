@@ -48,8 +48,9 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:id="@+id/imgAvatar"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="25dp"
                     android:src="@drawable/avatar" />
 
@@ -133,9 +134,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:textColor="#003049"
         android:fontFamily="@font/open_sans"
         android:text="O que você deseja Salvar?"
+        android:textColor="#003049"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -155,6 +156,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="415dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvlCarrosselPerfil"
         android:layout_width="match_parent"
@@ -164,5 +175,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+
+    <!-- This is a comment
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvlCarrosselPerfil"
+        app:tabGravity="fill"
+        app:tabMode="fixed" />
+
+
+    <androidx.viewpager2.widget.ViewPager2
+    android:id="@+id/viewPager"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/tabLayout"
+    app:layout_constraintEnd_toEndOf="@+id/tabLayout"
+    app:layout_constraintStart_toStartOf="@+id/tabLayout"
+    app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+     -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

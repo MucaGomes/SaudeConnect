@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_light"
-    tools:context=".screens_send_picture.FirstSendPicturePerfilFragment">
+    tools:context=".screens_send_picture.ThirdSendPictureVaccinationCard">
 
     <TextView
         android:id="@+id/txtSkip"
@@ -18,13 +18,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginBottom="250dp"
-        android:src="@drawable/icon_send_perfil"
+        android:src="@drawable/icon_send_picture_one"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:fontFamily="@font/font_poppins"
-        android:text="Notamos que você ainda não nos enviou sua foto de perfil"
+        android:text="Notamos que você ainda não nos enviou a foto da sua carterinha de vacinação"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
@@ -61,6 +60,5 @@
         app:layout_constraintEnd_toEndOf="@+id/btnSendImage"
         app:layout_constraintStart_toStartOf="@+id/btnSendImage"
         app:layout_constraintTop_toBottomOf="@+id/btnSendImage" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

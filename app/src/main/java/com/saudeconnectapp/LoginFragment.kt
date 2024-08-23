@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -41,9 +42,11 @@ class LoginFragment : Fragment() {
         // função que faz a auntenticação do login do usuario no banco
         loginAutenticado()
 
+
         txtSingUp.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_singUpFragment)
         }
+
 
 
         return binding.root
@@ -93,5 +96,6 @@ class LoginFragment : Fragment() {
             textInputEditTextPassword.setSelection(textInputEditTextPassword.text?.length ?: 0)
         }
     }
+
 
 }

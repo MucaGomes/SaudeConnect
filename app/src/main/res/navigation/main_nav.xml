@@ -82,6 +82,12 @@
         <action
             android:id="@+id/action_perfilFragment_to_editPerfilFragment"
             app:destination="@id/editPerfilFragment" />
+        <action
+            android:id="@+id/action_perfilFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_perfilFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
 
     </fragment>
     <fragment
@@ -146,6 +152,12 @@
         <action
             android:id="@+id/action_mainFragment_to_editPerfilFragment"
             app:destination="@id/editPerfilFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_sendPictureFragment"
+            app:destination="@id/sendPictureFragment" />
+        <action
+            android:id="@+id/action_mainFragment_self"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -158,6 +170,9 @@
         <action
             android:id="@+id/action_loginFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_sendPictureFragment"
+            app:destination="@id/sendPictureFragment" />
     </fragment>
     <fragment
         android:id="@+id/singUpFragment"
@@ -190,6 +205,15 @@
         tools:layout="@layout/fragment_edit_perfil">
         <action
             android:id="@+id/action_editPerfilFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sendPictureFragment"
+        android:name="com.saudeconnectapp.screens_send_picture.SendPictureFragment"
+        android:label="fragment_send_picture"
+        tools:layout="@layout/fragment_send_picture" >
+        <action
+            android:id="@+id/action_sendPictureFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

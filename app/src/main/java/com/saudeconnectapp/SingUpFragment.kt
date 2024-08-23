@@ -138,7 +138,7 @@ class SingUpFragment : Fragment() {
 
                             val userId = firebaseAuth.currentUser!!.uid
 
-                            db.collection("Usuários").document(userId).set(usuariosMap)
+                            db.collection("usuarios").document(userId).set(usuariosMap)
                                 .addOnCompleteListener {
                                     Log.d("db", "Sucesso ao salvar os dados no banco")
                                 }.addOnFailureListener {

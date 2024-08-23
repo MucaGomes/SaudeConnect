@@ -2,18 +2,22 @@ package com.saudeconnectapp.screens
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.saudeconnectapp.adapters.CardAdapter
 import com.saudeconnectapp.adapters.CardAdapterBot
 import com.app.clonemercadolivre.adapter.com.saudeconnectapp.model.CarrosselBot
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.MetadataChanges
+import com.google.firebase.storage.FirebaseStorage
 import com.saudeconnectapp.NotificationBottomSheetDialogFragment
 import com.saudeconnectapp.R
 import com.saudeconnectapp.WebViewFragment
@@ -45,14 +49,19 @@ class HomeFragment : Fragment() {
 
         setupRecyclerViewCarrosel()
         navigationScreens(btNavb)
-
         setupRecyclerViewCarroselBot()
+
+        // Carregue a imagem com Glide aqui, garantindo que o fragmento está ativo
+        if (isAdded && context != null) {
+            loadUserAvatarPefil()
+        }
+
 
         val notificationIcon = binding.notificationIcon
 
+
         notificationIcon.setOnClickListener {
-            Blurry.with(context)
-                .radius(10) // Define a intensidade do desfoque
+            Blurry.with(context).radius(10) // Define a intensidade do desfoque
                 .sampling(2) // Ajuste para performance e qualidade
                 .async() // Executa a operação de desfoque em uma thread separada
                 .onto(binding.backgroundView)
@@ -62,10 +71,10 @@ class HomeFragment : Fragment() {
         }
 
 
-
         return binding.root
 
     }
+
 
     private fun navigationScreens(btNavb: BottomNavigationView) {
         btNavb.setOnNavigationItemSelectedListener {
@@ -112,10 +121,8 @@ class HomeFragment : Fragment() {
                 bundle.putString("url", url)
                 fragment.arguments = bundle
 
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(null)
-                    .commit()
+                parentFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null).commit()
             }
         }!!
 
@@ -157,14 +164,48 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
-        val documentRef = db.collection("Usuários").document(usuarioId)
+        val documentRef = db.collection("usuarios").document(usuarioId)
 
         documentRef.addSnapshotListener(MetadataChanges.INCLUDE) { snapshot, e ->
             if (snapshot != null) {
                 binding.nameUserHome.text = snapshot.getString("nome")
             }
-
         }
+    }
+
+    private fun loadUserAvatarPefil() {
+        val userRef = db.collection("usuarios").document(usuarioId)
+
+        userRef.get().addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val fotoPerfilUrl = documentSnapshot.getString("fotoPerfilUrl")
+                    val fotoSusUrl = documentSnapshot.getString("fotoSusUrl")
+
+                    if (fotoPerfilUrl != null) {
+                        Log.d("Firestore", "URL da foto de perfil: $fotoPerfilUrl")
+                        // Carregar a imagem usando uma biblioteca como Glide ou Picasso
+
+                        if (isAdded && view != null) {
+                            context?.let {
+                                Glide.with(it).load(fotoPerfilUrl)
+                                    .circleCrop() // Para deixar a imagem redonda
+                                    .into(binding.imgAvatar)
+                            }
+                        }
+                    } else {
+                        Log.e("Firestore", "Campo 'fotoPerfilUrl' está null")
+                    }
+
+                    if (fotoSusUrl != null) {
+                        Log.d("Firestore", "URL da foto SUS: $fotoSusUrl")
+                    } else {
+                        Log.e("Firestore", "Campo 'fotoSusUrl' está null")
+                    }
+                } else {
+                    Log.e("Firestore", "Documento não encontrado!")
+                }
+            }.addOnFailureListener { exception ->
+                Log.e("Firestore", "Erro ao acessar o documento: ${exception.message}")
+            }
     }
 }
