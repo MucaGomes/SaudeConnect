@@ -21,9 +21,6 @@ class NotificationBottomSheetDialogFragment : BottomSheetDialogFragment() {
         binding = ScreenNotificationListBinding.inflate(layoutInflater, container, false)
 
 
-
-
-
         return binding.root
 
     }

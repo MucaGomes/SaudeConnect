@@ -129,7 +129,6 @@ class SingUpFragment : Fragment() {
 
                             val usuariosMap = hashMapOf(
                                 "nome" to name,
-                                "cpf" to cpf,
                                 "city" to city,
                                 "email" to email,
                                 "nasc" to nasc,

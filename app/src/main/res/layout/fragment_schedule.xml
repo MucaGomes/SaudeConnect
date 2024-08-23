@@ -21,24 +21,24 @@
         app:layout_constraintVertical_bias="0.0">
 
         <GridLayout
-            android:id="@+id/gridLayout3"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="70dp"
+            android:layout_marginTop="50dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:id="@+id/imgAvatar"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="25dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/circle_image"
                 android:src="@drawable/avatar" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical">
 
@@ -55,9 +55,16 @@
                     android:text="Saúde e bem-estar ao seu alcance"
                     android:textColor="#003049" />
 
-
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/notification_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="-25dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/icon_notification" />
 
         </GridLayout>
 
@@ -110,7 +117,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="80dp"
                     android:layout_height="30dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="20dp"
                     android:backgroundTint="@color/color_base"
                     android:gravity="center"
                     android:src="@drawable/avatar"
@@ -128,7 +135,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="80dp"
                     android:layout_height="30dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="20dp"
                     android:backgroundTint="@color/color_base"
                     android:gravity="center"
                     android:src="@drawable/avatar"

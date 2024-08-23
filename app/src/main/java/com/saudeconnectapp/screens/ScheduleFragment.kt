@@ -2,12 +2,18 @@ package com.saudeconnectapp.screens
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.MetadataChanges
+import com.saudeconnectapp.MessageDialogFragment
 import com.saudeconnectapp.R
 import com.saudeconnectapp.adapters.ProfessionalAdaptaer
 import com.saudeconnectapp.databinding.FragmentScheduleBinding
@@ -19,12 +25,20 @@ class ScheduleFragment : Fragment() {
     private lateinit var perfilProfessionalAdapter: ProfessionalAdaptaer
     private val listaProfessionalPerfil: MutableList<PerfilProfessional> = mutableListOf()
 
+
+    private val usuarioId = FirebaseAuth.getInstance().currentUser!!.uid
+    private val db = FirebaseFirestore.getInstance()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflar o layout para este fragmento
         binding = FragmentScheduleBinding.inflate(inflater, container, false)
+
+
+        // Exibe o DialogFragment quando o fragmento é aberto
+        MessageDialogFragment().show(parentFragmentManager, "MessageDialog")
 
         // Configurar o RecyclerView
         setupRecyclerViewProfessionalList()
@@ -50,6 +64,58 @@ class ScheduleFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadUserAvatarPefil() // Ensure the photo is updated when the fragment resumes
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val documentRef = db.collection("usuarios").document(usuarioId)
+
+        documentRef.addSnapshotListener(MetadataChanges.INCLUDE) { snapshot, e ->
+            if (snapshot != null) {
+                binding.nameUserHome.text = snapshot.getString("nome")
+            }
+        }
+    }
+
+    private fun loadUserAvatarPefil() {
+        val userRef = db.collection("usuarios").document(usuarioId)
+
+        userRef.get().addOnSuccessListener { documentSnapshot ->
+            if (documentSnapshot.exists()) {
+                val fotoPerfilUrl = documentSnapshot.getString("fotoPerfilUrl")
+                val fotoSusUrl = documentSnapshot.getString("fotoSusUrl")
+
+                if (fotoPerfilUrl != null) {
+                    Log.d("Firestore", "URL da foto de perfil: $fotoPerfilUrl")
+                    // Carregar a imagem usando uma biblioteca como Glide ou Picasso
+
+                    if (isAdded && view != null) {
+                        context?.let {
+                            Glide.with(it).load(fotoPerfilUrl)
+                                .circleCrop() // Para deixar a imagem redonda
+                                .into(binding.imgAvatar)
+                        }
+                    }
+                } else {
+                    Log.e("Firestore", "Campo 'fotoPerfilUrl' está null")
+                }
+
+                if (fotoSusUrl != null) {
+                    Log.d("Firestore", "URL da foto SUS: $fotoSusUrl")
+                } else {
+                    Log.e("Firestore", "Campo 'fotoSusUrl' está null")
+                }
+            } else {
+                Log.e("Firestore", "Documento não encontrado!")
+            }
+        }.addOnFailureListener { exception ->
+            Log.e("Firestore", "Erro ao acessar o documento: ${exception.message}")
+        }
     }
 
     private fun setupRecyclerViewProfessionalList() {

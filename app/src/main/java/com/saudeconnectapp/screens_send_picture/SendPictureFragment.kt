@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -56,58 +58,67 @@ class SendPictureFragment : Fragment() {
         val storageRef = storage.reference
 
         val adapter = binding.viewPager.adapter as SendPictureAdapter
-        val fotoPefilFragment = adapter.getFragment(0) as? FirstSendPicturePerfilFragment
+        val fotoPerfilFragment = adapter.getFragment(0) as? FirstSendPicturePerfilFragment
         val fotoSusFragment = adapter.getFragment(1) as? SecondSendPictureSusFragment
         val fotoCardVaccinationFragment = adapter.getFragment(2) as? ThirdSendPictureVaccinationCard
 
-        // Verifique se os fragments não são nulos e se possuem URIs válidos
-        val uriPerfil = fotoPefilFragment?.getFotoPerfil()
+        val uriPerfil = fotoPerfilFragment?.getFotoPerfil()
         val uriSus = fotoSusFragment?.getFotoSusUri()
         val uriCardVac = fotoCardVaccinationFragment?.getFotoSusUri()
 
+        val uploadTasks = mutableListOf<Task<*>>()
+
         uriPerfil?.let { uri ->
             val perfilRef = storageRef.child("fotosPerfil/$userId/perfil.jpg")
-            perfilRef.putFile(uri).addOnSuccessListener {
-                perfilRef.downloadUrl.addOnSuccessListener { url ->
-                    salvarUrlNoFirestore(url.toString(), "fotoPerfilUrl")
+            val uploadTask = perfilRef.putFile(uri).addOnSuccessListener {
+                    perfilRef.downloadUrl.addOnSuccessListener { url ->
+                        salvarUrlNoFirestore(url.toString(), "fotoPerfilUrl")
+                    }.addOnFailureListener { exception ->
+                        Log.e(
+                            "Firebase", "Erro ao obter URL da foto de perfil: ${exception.message}"
+                        )
+                    }
                 }.addOnFailureListener { exception ->
-                    Log.e("Firebase", "Erro ao obter URL da foto de perfil: ${exception.message}")
+                    Log.e(
+                        "Firebase", "Erro ao fazer upload da foto de perfil: ${exception.message}"
+                    )
                 }
-            }.addOnFailureListener { exception ->
-                Log.e("Firebase", "Erro ao fazer upload da foto de perfil: ${exception.message}")
-            }
+            uploadTasks.add(uploadTask)
         }
 
         uriSus?.let { uri ->
             val susRef = storageRef.child("fotosSus/$userId/sus.jpg")
-            susRef.putFile(uri).addOnSuccessListener {
-                susRef.downloadUrl.addOnSuccessListener { url ->
-                    salvarUrlNoFirestore(url.toString(), "fotoSusUrl")
+            val uploadTask = susRef.putFile(uri).addOnSuccessListener {
+                    susRef.downloadUrl.addOnSuccessListener { url ->
+                        salvarUrlNoFirestore(url.toString(), "fotoSusUrl")
+                    }
+                }.addOnFailureListener {
+                    Log.e("Upload Error", "Erro ao fazer upload do cartão SUS", it)
                 }
-            }.addOnFailureListener {
-                Log.e("Upload Error", "Erro ao fazer upload do cartão SUS", it)
-            }
+            uploadTasks.add(uploadTask)
         }
 
         uriCardVac?.let { uri ->
-            val susRef = storageRef.child("fotosCardVaccination/$userId/vaccination.jpg")
-            susRef.putFile(uri).addOnSuccessListener {
-                susRef.downloadUrl.addOnSuccessListener { url ->
-                    salvarUrlNoFirestore(url.toString(), "fotoCardVacUrl")
+            val cardVacRef = storageRef.child("fotosCardVaccination/$userId/vaccination.jpg")
+            val uploadTask = cardVacRef.putFile(uri).addOnSuccessListener {
+                    cardVacRef.downloadUrl.addOnSuccessListener { url ->
+                        salvarUrlNoFirestore(url.toString(), "fotoCardVacUrl")
+                    }
+                }.addOnFailureListener {
+                    Log.e("Upload Error", "Erro ao fazer upload do cartão de vacinação", it)
                 }
-            }.addOnFailureListener {
-                Log.e("Upload Error", "Erro ao fazer upload do cartão SUS", it)
-            }
+            uploadTasks.add(uploadTask)
         }
 
-
         // Atualizar o campo fotosEnviadas no Firestore
-        db.collection("usuarios").document(userId).update("fotosEnviadas", true)
-            .addOnSuccessListener {
-                updateProfileCompleteStatus()
-            }.addOnFailureListener {
-                Log.e("Firestore Update Error", "Erro ao atualizar o status no Firestore", it)
-            }
+        Tasks.whenAllComplete(uploadTasks).addOnCompleteListener {
+            db.collection("usuarios").document(userId).update("fotosEnviadas", true)
+                .addOnSuccessListener {
+                    updateProfileCompleteStatus()
+                }.addOnFailureListener {
+                    Log.e("Firestore Update Error", "Erro ao atualizar o status no Firestore", it)
+                }
+        }
     }
 
     private fun updateProfileCompleteStatus() {
@@ -115,13 +126,13 @@ class SendPictureFragment : Fragment() {
         val db = FirebaseFirestore.getInstance()
 
         val userRef = db.collection("usuarios").document(userId)
-        userRef.update("hasCompletedPhotoUpload", true)
+        userRef.update("isProfileComplete", true)
             .addOnSuccessListener {
                 // Navegar para o HomeFragment após completar o upload
                 findNavController().navigate(R.id.action_sendPictureFragment_to_mainFragment)
             }
             .addOnFailureListener { e ->
-                Log.e("PhotoUpload", "Error updating document", e)
+                Log.e("PhotoUpload", "Erro ao atualizar o perfil", e)
             }
     }
 

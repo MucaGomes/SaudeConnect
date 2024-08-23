@@ -6,19 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.saudeconnectapp.MessageDialogFragment
 import com.saudeconnectapp.R
 import com.saudeconnectapp.databinding.FragmentMapBinding
 
 class MapFragment : Fragment() {
 
-    private lateinit var binding : FragmentMapBinding
+    private lateinit var binding: FragmentMapBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMapBinding.inflate(layoutInflater, container, false)
+
+        // Exibe o DialogFragment quando o fragmento é aberto
+        MessageDialogFragment().show(parentFragmentManager, "MessageDialog")
 
 
         val btNavb = binding.bottomNavigation
@@ -35,8 +38,7 @@ class MapFragment : Fragment() {
             }
 
             childFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, selectedFragment)
-                .commit()
+                .replace(R.id.fragment_container, selectedFragment).commit()
 
             true
         }

@@ -23,15 +23,18 @@ class FirstSendPicturePerfilFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentFirstSendPicturePerfilBinding.inflate(layoutInflater, container, false)
 
+        // acão de abrir a galeria
         binding.btnSendImage.setOnClickListener{
             openGallery()
         }
 
+        // navegação entre as pages
         val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
-
         binding.txtSkip.setOnClickListener{
             viewPager?.currentItem = 1
         }
+
+
         return binding.root
     }
 

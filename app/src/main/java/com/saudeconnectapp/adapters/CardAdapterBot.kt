@@ -32,12 +32,14 @@ class CardAdapterBot(
             holder.img.scaleType = ImageView.ScaleType.CENTER_CROP
         }
 
-        holder.itemView.setOnClickListener{
-            when (position){
-                0->
-                    onItemClick("https://marjan.com.br/blog/5-exercicios-para-controlar-a-ansiedade/")
-                1->
-                    onItemClick("https://blog.sabin.com.br/autocuidado/exames-indicados-para-o-seu-check-up/")
+        holder.itemView.setOnClickListener {
+            when (position) {
+                0 -> onItemClick("https://www.gov.br/saude/pt-br/assuntos/noticias/2024/agosto/saiba-quais-sao-os-sintomas-e-as-formas-de-transmissao-da-doenca")
+
+                1 -> onItemClick("https://blog.sabin.com.br/autocuidado/exames-indicados-para-o-seu-check-up/")
+
+                2 -> onItemClick("https://marjan.com.br/blog/5-exercicios-para-controlar-a-ansiedade/")
+
             }
         }
 

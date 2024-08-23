@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="20dp"
+    android:backgroundTint="@color/color_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/fundo_acard"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="Cartão SUS"
+            android:textColor="#003049"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/txtAlterar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:text="Alterar Imagem"
+            android:textSize="20sp"
+            android:layout_margin="20dp"
+            android:textColor="@color/color_base"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgSend"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/cartao_sus_template"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtAlterar" />
+
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/open_sans"
+            android:text="Formatos aceitos: JPG, PNG Tamanho máximo: 5MB"
+            app:layout_constraintStart_toStartOf="@+id/imgSend"
+            app:layout_constraintTop_toBottomOf="@+id/imgSend" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="323dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="57dp"
+            android:fontFamily="@font/open_sans"
+            android:text="Dica: Certifique-se de que todos os detalhes estejam legíveis e sem reflexos"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView8"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="151dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_login"
+            android:text="Salvar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

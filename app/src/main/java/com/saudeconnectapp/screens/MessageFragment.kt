@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.saudeconnectapp.MessageDialogFragment
 import com.saudeconnectapp.R
 import com.saudeconnectapp.databinding.FragmentMessageBinding
 
@@ -18,6 +19,10 @@ class MessageFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMessageBinding.inflate(layoutInflater, container, false)
+
+        // Exibe o DialogFragment quando o fragmento é aberto
+        MessageDialogFragment().show(parentFragmentManager, "MessageDialog")
+
 
         val btNavb = binding.bottomNavigation
 

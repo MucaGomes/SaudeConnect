@@ -51,11 +51,6 @@ class HomeFragment : Fragment() {
         navigationScreens(btNavb)
         setupRecyclerViewCarroselBot()
 
-        // Carregue a imagem com Glide aqui, garantindo que o fragmento está ativo
-        if (isAdded && context != null) {
-            loadUserAvatarPefil()
-        }
-
 
         val notificationIcon = binding.notificationIcon
 
@@ -73,6 +68,11 @@ class HomeFragment : Fragment() {
 
         return binding.root
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadUserAvatarPefil() // Ensure the photo is updated when the fragment resumes
     }
 
 
@@ -132,36 +132,43 @@ class HomeFragment : Fragment() {
 
 
     private fun getCardsCarrosel() {
-        val cardOne = CarrosselTop(
-            "Encontre Médicos para Telemedicina de Forma Rápida e Fácil",
-            R.id.btnGoOne,
-            R.drawable.image_top_info
-        )
+        if (listaCarrosselTop.isEmpty()) {
+            val cardOne = CarrosselTop(
+                "Encontre Médicos para Telemedicina de Forma Rápida e Fácil",
+                R.id.btnGoOne,
+                R.drawable.image_top_info
+            )
+            listaCarrosselTop.add(cardOne)
 
-        listaCarrosselTop.add(cardOne)
-
-        val cardTwo = CarrosselTop(
-            "Econtre farmácias próximas de você com os melhores preços",
-            R.id.btnGoTwo,
-            R.drawable.farmacia_image
-        )
-        listaCarrosselTop.add(cardTwo)
+            val cardTwo = CarrosselTop(
+                "Econtre farmácias próximas de você com os melhores preços",
+                R.id.btnGoTwo,
+                R.drawable.farmacia_image
+            )
+            listaCarrosselTop.add(cardTwo)
+            carroselAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun getCardsCarroselBot() {
-        val cardOne = CarrosselBot(
-            "Exercícios para Aliviar a Ansiedade", R.drawable.img_carrossel_bot_1
-        )
+        if (listaCarrosselBot.isEmpty()) {
+            val cardOne = CarrosselBot(
+                "MPOX:Saiba quais são os sintomas", R.drawable.img_card3_bot
+            )
+            listaCarrosselBot.add(cardOne)
 
-        listaCarrosselBot.add(cardOne)
+            val cardTwo = CarrosselBot(
+                "Check-ups Médicos: Quando e Por Que", R.drawable.img_carrossel_bot_2
+            )
+            listaCarrosselBot.add(cardTwo)
 
-        val cardTwo = CarrosselBot(
-            "Check-ups Médicos: Quando e Por Que", R.drawable.img_carrossel_bot_2
-        )
-
-        listaCarrosselBot.add(cardTwo)
+            val cardThree = CarrosselBot(
+                "Exercícios para Aliviar a Ansiedade", R.drawable.img_carrossel_bot_1
+            )
+            listaCarrosselBot.add(cardThree)
+            carroselBotAdapter.notifyDataSetChanged()
+        }
     }
-
     override fun onStart() {
         super.onStart()
         val documentRef = db.collection("usuarios").document(usuarioId)

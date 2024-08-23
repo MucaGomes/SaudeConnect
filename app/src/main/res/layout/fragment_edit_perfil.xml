@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/background_view"
     android:background="@color/color_light"
     tools:context=".screens.EditPerfilFragment">
 
@@ -61,7 +62,8 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="25dp"
-                    android:src="@drawable/avatar" />
+                    android:src="@drawable/avatar"
+                    android:id="@+id/imgAvatar"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -76,6 +78,7 @@
                         android:fontFamily="@font/open_sans"
                         android:text="Maria Elena"
                         android:textColor="#003049"
+                        android:id="@+id/txtNameUser"
                         android:textSize="24dp"
                         android:textStyle="bold" />
 

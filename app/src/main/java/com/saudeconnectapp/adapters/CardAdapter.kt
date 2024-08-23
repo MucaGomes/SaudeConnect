@@ -25,7 +25,7 @@ class CardAdapter(
         holder.title.text = listaCarrosselTop[position].title.toString()
         holder.img.setImageResource(listaCarrosselTop[position].img!!)
         holder.btn.setOnClickListener {
-            Toast.makeText(context,"teste", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"Em desenvolvimento...", Toast.LENGTH_SHORT).show()
         }
     }
 
