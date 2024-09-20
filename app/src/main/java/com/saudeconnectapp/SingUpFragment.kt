@@ -1,8 +1,6 @@
 package com.saudeconnectapp
 
 import android.app.DatePickerDialog
-import android.content.ContentValues.TAG
-import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
@@ -10,18 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
@@ -33,7 +26,6 @@ import com.saudeconnectapp.databinding.FragmentSingUpBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-import java.util.logging.Level
 
 
 class SingUpFragment : Fragment() {
@@ -52,7 +44,7 @@ class SingUpFragment : Fragment() {
 
         val imageViewShowPassword = binding.imageViewShowPassword
         val textInputEditTextPassword = binding.txtEditPassword
-        val dateOfBirthEditText = binding.txtEditNasc
+        val dateOfBirthEditText = binding.boxEditNasc
         val btBack = binding.imgBack
         val buttonSingUp = binding.btSingUp
 
@@ -108,24 +100,40 @@ class SingUpFragment : Fragment() {
         return binding.root
     }
 
+    private fun validarCampos(email: String, pass: String, cpf: String, city: String, nasc: String, name: String): String? {
+        return when {
+            email.isBlank() -> "O campo de email está vazio!"
+            pass.isBlank() -> "O campo de senha está vazio!"
+            cpf.isBlank() -> "O campo de CPF está vazio!"
+            city.isBlank() -> "O campo de cidade está vazio!"
+            nasc.isBlank() -> "O campo de data de nascimento está vazio!"
+            name.isBlank() -> "O campo de nome está vazio!"
+            else -> null
+        }
+    }
+
     private fun buttonRegisterClick(buttonSingUp: Button) {
         buttonSingUp.setOnClickListener {
-
             val email = binding.txtEditEmail.text.toString()
             val pass = binding.txtEditPassword.text.toString()
             val cpf = binding.txtEditCPF.text.toString()
             val city = binding.txtEditCity.text.toString()
-            val uf = binding.spinnerUF.selectedItem
+            val uf = binding.spinnerUF.selectedItem?.toString() ?: ""
             val nasc = binding.txtEditNasc.text.toString()
             val name = binding.txtEditName.text.toString()
 
-            if (email.isNotEmpty() && pass.isNotEmpty() && cpf.isNotEmpty() && city.isNotEmpty() && nasc.isNotEmpty() && name.isNotEmpty()) {
+            // Verificar se os campos estão em branco
+            val mensagemErroCampos = validarCampos(email, pass, cpf, city, nasc, name)
+
+            if (mensagemErroCampos != null) {
+                // Mostrar mensagem de erro se houver campos vazios
+                Toast.makeText(context, mensagemErroCampos, Toast.LENGTH_SHORT).show()
+            } else {
+                // Proseguir com o cadastro
                 firebaseAuth.createUserWithEmailAndPassword(email, pass)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(
-                                context, "Conta Criada Com Sucesso!", Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText(context, "Conta Criada Com Sucesso!", Toast.LENGTH_SHORT).show()
 
                             val usuariosMap = hashMapOf(
                                 "nome" to name,
@@ -144,7 +152,7 @@ class SingUpFragment : Fragment() {
                                     Log.d("db", it.toString())
                                 }
 
-
+                            // Limpar os campos após cadastro
                             binding.txtEditEmail.setText("")
                             binding.txtEditCPF.setText("")
                             binding.txtEditCity.setText("")
@@ -153,26 +161,25 @@ class SingUpFragment : Fragment() {
                             binding.txtEditPassword.setText("")
 
                             findNavController().navigate(R.id.action_singUpFragment_to_loginFragment)
-
                         }
                     }.addOnFailureListener { exception ->
                         val mensagemErro = when (exception) {
                             is FirebaseAuthWeakPasswordException -> "Digite uma senha com 6 Caracteres no mínimo!"
-                            is FirebaseAuthInvalidCredentialsException -> "Digite um email Válido!"
+                            is FirebaseAuthInvalidCredentialsException -> "Digite um email válido!"
                             is FirebaseAuthUserCollisionException -> "Essa conta já foi cadastrada!"
-                            is FirebaseNetworkException -> "Verifique a conexão com a Internet e Tente novamente"
+                            is FirebaseNetworkException -> "Verifique a conexão com a Internet e tente novamente"
                             else -> "Erro ao Cadastrar usuário!"
                         }
-                        Toast.makeText(
-                            context, mensagemErro, Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(context, mensagemErro, Toast.LENGTH_SHORT).show()
                     }
             }
         }
     }
 
-    private fun dateOfBirthDialog(dateOfBirthEditText: TextView) {
-        dateOfBirthEditText.setOnClickListener {
+    private fun dateOfBirthDialog(dateOfBirthEditBox: LinearLayout) {
+
+        val dateOfBirthEditText = binding.txtEditNasc
+        dateOfBirthEditBox.setOnClickListener {
             val calendar = Calendar.getInstance()
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
@@ -180,7 +187,7 @@ class SingUpFragment : Fragment() {
                     val selectedDate = Calendar.getInstance()
                     selectedDate.set(year, month, dayOfMonth)
                     val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                    dateOfBirthEditText.setText(dateFormat.format(selectedDate.time))
+                    dateOfBirthEditText.text = dateFormat.format(selectedDate.time)
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),

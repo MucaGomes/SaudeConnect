@@ -4,44 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/plano_de_fundo"
+    android:background="@color/color_light"
     android:orientation="vertical"
     tools:context=".LoginFragment">
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="250dp"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:src="@drawable/logotipo_slogan" />
+        android:src="@drawable/img_login" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/poppins"
-        android:text="Login"
+        android:layout_gravity="left"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/open_sans"
+        android:text="Bem vindo(a) ao"
         android:textColor="#003049"
         android:textSize="30sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_gravity="left"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/poppins"
-        android:text="E-mail"
+        android:text="Saúde Connect"
         android:textColor="#003049"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textSize="30sp" />
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="-5dp"
-        android:layout_marginEnd="30dp"
-        app:boxBackgroundMode="outline"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:elevation="10dp"
+        android:hint="Email"
+        android:textColorHint="@color/black"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
@@ -52,30 +54,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_login"
-            android:backgroundTint="#EEEDED"
+            android:textSize="11sp"
+            android:backgroundTint="#FEFBFB"
+            android:fontFamily="@font/open_sans"
             android:maxLines="1"
             android:textColor="#000000" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:fontFamily="@font/poppins"
-        android:text="Senha"
-        android:textColor="#003049"
-        android:textSize="19sp"
-        android:textStyle="bold" />
-
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtInputEmail"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="-5dp"
-        android:layout_marginEnd="30dp"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:elevation="10dp"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
@@ -89,12 +82,15 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtEditPassword"
                 android:layout_width="match_parent"
-                android:inputType="textPassword"
                 android:layout_height="match_parent"
-                android:textColor="#000000"
                 android:background="@drawable/button_login"
-                android:backgroundTint="#EEEDED"
-                android:maxLines="1" />
+                android:backgroundTint="#FEFBFB"
+                android:fontFamily="@font/open_sans"
+                android:hint="Senha"
+                android:textSize="11sp"
+                android:inputType="textPassword"
+                android:textColor="#000000"
+                android:textColorHint="@color/black" />
 
             <ImageView
                 android:id="@+id/imageViewShowPassword"
@@ -112,15 +108,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/txtForgetPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/open_sans"
         android:shadowColor="#000000"
         android:shadowDx="1"
         android:shadowDy="1"
-        android:id="@+id/txtForgetPassword"
         android:shadowRadius="1"
         android:text="Esqueci a senha"
         android:textColor="#8D0303"
@@ -128,13 +124,11 @@
         android:textStyle="bold" />
 
 
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/open_sans"
         android:text="Não possui uma conta?"
         android:textColor="#003049"
@@ -142,16 +136,15 @@
         android:textStyle="bold" />
 
 
-
     <TextView
+        android:id="@+id/txtSingUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/open_sans"
         android:shadowColor="#000000"
         android:shadowDx="1"
-        android:id="@+id/txtSingUp"
         android:shadowDy="1"
         android:shadowRadius="1"
         android:text="Cadastre-se"

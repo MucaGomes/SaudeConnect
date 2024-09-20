@@ -137,7 +137,7 @@ class ScheduleFragment : Fragment() {
 
     private fun getProfessionals() {
         val cardOne = PerfilProfessional(
-            R.drawable.avatar,
+            R.drawable.prof_one,
             "José da Silva",
             "Dentista",
             R.id.btnSchedule
@@ -145,31 +145,11 @@ class ScheduleFragment : Fragment() {
         listaProfessionalPerfil.add(cardOne)
 
         val cardTwo = PerfilProfessional(
-            R.drawable.avatar,
+            R.drawable.prof_two,
             "Maria Guilhermina",
             "Pediatra"
         )
         listaProfessionalPerfil.add(cardTwo)
 
-        val cardThree = PerfilProfessional(
-            R.drawable.avatar,
-            "Jonas J. Marson",
-            "Dentista"
-        )
-        listaProfessionalPerfil.add(cardThree)
-
-        val cardFour = PerfilProfessional(
-            R.drawable.avatar,
-            "João Pedro",
-            "Clinico Geral"
-        )
-        listaProfessionalPerfil.add(cardFour)
-
-        val cardFive = PerfilProfessional(
-            R.drawable.avatar,
-            "Deivid V. Lima",
-            "Clinico Geral"
-        )
-        listaProfessionalPerfil.add(cardFive)
     }
 }
