@@ -91,7 +91,5 @@ class MessageFragment : Fragment() {
             "Há 50 min"
         )
         listaProfessionalPerfil.add(cardTwo)
-
-
     }
 }
