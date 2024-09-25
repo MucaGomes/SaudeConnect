@@ -1,4 +1,4 @@
-package com.saudeconnectapp
+package com.saudeconnectapp.button_dialog_screens
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -19,13 +19,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
-import com.saudeconnectapp.databinding.ScreenDialogCarteiraConvenioBinding
+import com.saudeconnectapp.FullScreenImageCnsActivity
+import com.saudeconnectapp.R
+import com.saudeconnectapp.databinding.ScreenDialogCnsBinding
 import jp.wasabeef.blurry.Blurry
 
 
-class CardConvBottomSheetDialogFragment : BottomSheetDialogFragment() {
+class CnsBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
-    private lateinit var binding: ScreenDialogCarteiraConvenioBinding
+    private lateinit var binding: ScreenDialogCnsBinding
     private var uriPictureCns: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
     private lateinit var auth: FirebaseAuth
@@ -39,7 +41,7 @@ class CardConvBottomSheetDialogFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        binding = ScreenDialogCarteiraConvenioBinding.inflate(layoutInflater, container, false)
+        binding = ScreenDialogCnsBinding.inflate(layoutInflater, container, false)
 
 
         auth = FirebaseAuth.getInstance()
@@ -80,20 +82,21 @@ class CardConvBottomSheetDialogFragment : BottomSheetDialogFragment() {
         val userId = auth.currentUser?.uid ?: return
         val storageRef = storage.reference
 
-        val uriCardConv = getPictureCns()
+        val uriCns = getPictureCns()
         val uploadTasks = mutableListOf<Task<*>>()
 
 
-        uriCardConv?.let { uri ->
-            val cardVacRef = storageRef.child("fotosCardConv/$userId/cardConv.jpg")
-            val uploadTask = cardVacRef.putFile(uri).addOnSuccessListener {
-                cardVacRef.downloadUrl.addOnSuccessListener { url ->
-                    salvarUrlNoFirestore(url.toString(), "fotoCardConvUrl")
+        uriCns?.let { uri ->
+            val perfilRef = storageRef.child("fotosSus/$userId/sus.jpg")
+            val uploadTask = perfilRef.putFile(uri).addOnSuccessListener {
+                perfilRef.downloadUrl.addOnSuccessListener { url ->
+                    salvarUrlNoFirestore(url.toString(), "fotoSUSUrl")
+                }.addOnFailureListener { exception ->
+                    Log.e(
+                        "Firebase",
+                        "Erro ao obter URL da foto do cartão do SUS: ${exception.message}"
+                    )
                 }
-            }.addOnFailureListener {
-
-                Log.e("Upload Error", "Erro ao fazer upload do cartão de vacinação", it)
-
             }.addOnFailureListener { exception ->
                 Log.e(
                     "Firebase",
@@ -164,7 +167,7 @@ class CardConvBottomSheetDialogFragment : BottomSheetDialogFragment() {
         val userRef = db.collection("usuarios").document(userId)
 
         userRef.get().addOnSuccessListener { documentSnapshot ->
-            imageUrl = documentSnapshot.getString("fotoCardConvUrl")
+            imageUrl = documentSnapshot.getString("fotoSUSUrl")
             if (!imageUrl.isNullOrEmpty()) {
                 if (isAdded && view != null) {
                     Glide.with(requireContext()).load(imageUrl)
@@ -173,7 +176,7 @@ class CardConvBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 }
             }
         }.addOnFailureListener {
-            Log.e("Firestore", "Erro ao carregar a imagem do CardVac: ${it.message}")
+            Log.e("Firestore", "Erro ao carregar a imagem do CNS: ${it.message}")
         }
     }
 

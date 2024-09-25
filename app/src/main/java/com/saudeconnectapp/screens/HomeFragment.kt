@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.saudeconnectapp.adapters.CardAdapter
 import com.saudeconnectapp.adapters.CardAdapterBot
@@ -17,8 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.MetadataChanges
-import com.google.firebase.storage.FirebaseStorage
-import com.saudeconnectapp.NotificationBottomSheetDialogFragment
+import com.saudeconnectapp.button_dialog_screens.NotificationBottomSheetDialogFragment
 import com.saudeconnectapp.R
 import com.saudeconnectapp.WebViewFragment
 import com.saudeconnectapp.databinding.FragmentHomeBinding

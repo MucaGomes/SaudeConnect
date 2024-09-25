@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_light"
     android:orientation="vertical"
-    tools:context=".SingUpFragment">
+    tools:context=".register_user.SingUpFragment">
 
     <ImageView
         android:layout_width="match_parent"
@@ -107,7 +107,7 @@
                         android:maxLines="1"
                         android:textColor="#000000"
                         android:textColorHint="#003049"
-                        android:textSize="10sp"
+                        android:textSize="8sp"
                         android:textStyle="bold" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -136,7 +136,8 @@
                         android:maxLines="1"
                         android:textColor="#000000"
                         android:textColorHint="#003049"
-                        android:textSize="11sp"
+
+                        android:textSize="8sp"
                         android:textStyle="bold" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -212,7 +213,7 @@
                         android:textColorHint="#003049"
                         android:maxLines="1"
                         android:textColor="#000000"
-                        android:textSize="11sp" />
+                        android:textSize="8sp"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -271,7 +272,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/txtEditCity"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="45dp"
                             android:background="@drawable/button_login"
                             android:backgroundTint="#FEFBFB"
                             android:fontFamily="@font/opens_sans"
@@ -279,7 +280,7 @@
                             android:textColorHint="#003049"
                             android:maxLines="1"
                             android:textColor="#000000"
-                            android:textSize="11sp" />
+                            android:textSize="8sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- TextInputLayout para o Spinner de UF -->
@@ -299,11 +300,11 @@
                         <Spinner
                             android:id="@+id/spinnerUF"
                             android:layout_width="161dp"
-                            android:layout_height="50dp"
+                            android:layout_height="45dp"
                             android:layout_marginTop="5dp"
                             android:background="@drawable/button_login"
                             android:backgroundTint="#FEFBFB"
-                            android:padding="10dp"
+                            android:padding="2dp"
                             android:fontFamily="@font/opens_sans"
                             android:textStyle="bold"
                             android:textColorHint="#003049"

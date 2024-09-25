@@ -11,22 +11,28 @@ import com.saudeconnectapp.databinding.FragmentOnboardingFirstBinding
 
 class OnboardingFirstFragment : Fragment() {
 
-    private lateinit var binding : FragmentOnboardingFirstBinding
+    private lateinit var binding: FragmentOnboardingFirstBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentOnboardingFirstBinding.inflate(layoutInflater, container, false)
 
         val next = binding.txtSkip
+        val nextFab = binding.floatingActionButton
 
         val viewPager = activity?.findViewById<ViewPager2>(R.id.view_pager)
 
-        next.setOnClickListener{
+        next.setOnClickListener {
             viewPager?.currentItem = 1
         }
+
+        nextFab.setOnClickListener {
+            viewPager?.currentItem = 1
+        }
+
+
 
         return binding.root
     }

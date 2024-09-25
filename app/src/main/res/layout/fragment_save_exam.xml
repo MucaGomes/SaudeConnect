@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_light"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".save_information_medical.SaveExamFragment">
+
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="left"
+        android:layout_margin="5dp"
+        android:src="@drawable/back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Cadastrar um novo exame"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Titulo do Exame"
+        android:textSize="18sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:elevation="10dp"
+        android:textColorHint="@color/black"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEditTitleExam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_login"
+            android:backgroundTint="#FEFBFB"
+            android:fontFamily="@font/opens_sans"
+            android:maxLines="1"
+            android:textColor="#000000"
+            android:textColorHint="#003049"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Especialidade"
+        android:textSize="18sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:elevation="10dp"
+        android:textColorHint="@color/black"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEditSpeciality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_login"
+            android:backgroundTint="#FEFBFB"
+            android:fontFamily="@font/opens_sans"
+            android:maxLines="1"
+            android:textColor="#000000"
+            android:textColorHint="#003049"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Data que foi realizado"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/boxEditDate"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/linear_layout_corner"
+        android:orientation="horizontal"
+        android:textColorHint="@color/black"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp">
+
+        <TextView
+            android:id="@+id/txtEditDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/opens_sans"
+            android:textColor="@color/black"
+            android:textColorHint="#003049"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Instituição"
+        android:textSize="18sp" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/boxEditManufacturer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:elevation="10dp"
+        android:hint="Ex: Santa Casa"
+        android:textColorHint="@color/black"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEditInstitution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_login"
+            android:backgroundTint="#FEFBFB"
+            android:fontFamily="@font/opens_sans"
+            android:maxLines="1"
+            android:textColor="#000000"
+            android:textColorHint="#003049"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Cidade"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="20dp"
+            android:text="UF"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/boxEditCity"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:elevation="10dp"
+            android:textColorHint="@color/black"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEditCity"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/button_login"
+                android:backgroundTint="#FEFBFB"
+                android:fontFamily="@font/opens_sans"
+                android:maxLines="1"
+                android:textColor="#000000"
+                android:textColorHint="#003049"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/spinnerUf"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_login"
+            android:backgroundTint="#FEFBFB"
+            android:fontFamily="@font/opens_sans"
+            android:padding="2dp"
+            android:textColor="#000000"
+            android:textColorHint="#003049"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="Imagem da Nota"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonChooseImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escolher Imagem" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="(OPICIONAL)"
+            android:textColor="@color/color_base" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonSaveExam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar Exame" />
+</LinearLayout>
+
+

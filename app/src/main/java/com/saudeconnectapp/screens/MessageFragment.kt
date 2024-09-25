@@ -5,15 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.saudeconnectapp.MessageDialogFragment
+import com.saudeconnectapp.button_dialog_screens.MessageDialogFragment
 import com.saudeconnectapp.R
 import com.saudeconnectapp.adapters.ChatProfessionalsAdaptaer
-import com.saudeconnectapp.adapters.ProfessionalAdaptaer
 import com.saudeconnectapp.databinding.FragmentMessageBinding
 import com.saudeconnectapp.model.ChatProfessional
-import com.saudeconnectapp.model.PerfilProfessional
 
 class MessageFragment : Fragment() {
 

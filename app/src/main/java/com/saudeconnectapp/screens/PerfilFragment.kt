@@ -4,33 +4,22 @@ import CardPerfilAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.IdRes
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
-import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.FragmentNavigator
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.app.clonemercadolivre.adapter.com.saudeconnectapp.model.CarrosselBot
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.MetadataChanges
-import com.saudeconnectapp.HomeLoginFragment
 import com.saudeconnectapp.MainActivity
 import com.saudeconnectapp.R
-import com.saudeconnectapp.adapters.CardAdapter
-import com.saudeconnectapp.adapters.CardAdapterBot
-import com.saudeconnectapp.databinding.FragmentHomeBinding
 import com.saudeconnectapp.databinding.FragmentPerfilBinding
 import com.saudeconnectapp.model.CarrosselPerfil
-import com.saudeconnectapp.model.CarrosselTop
 
 class PerfilFragment : Fragment() {
 
@@ -47,11 +36,8 @@ class PerfilFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentPerfilBinding.inflate(layoutInflater, container, false)
-
         setupRecyclerViewCarroselPerfil()
-
         auth = FirebaseAuth.getInstance()
 
         binding.btnGoEditPerfil.setOnClickListener {
@@ -62,6 +48,11 @@ class PerfilFragment : Fragment() {
         binding.btnLogoff.setOnClickListener {
             logout()
             restartApp()
+        }
+
+        setFragmentResultListener("requestKey") { key, bundle ->
+            val lastVaccineName = bundle.getString("lastVaccineName")
+            updateVaccineInfo()
         }
 
         return binding.root
@@ -75,7 +66,8 @@ class PerfilFragment : Fragment() {
     }
 
     private fun logout() {
-        auth.signOut() // Verifica se o fragmento está anexado antes de tentar navegar
+        auth.signOut()
+
     }
 
     private fun navigationScreens(btNavb: BottomNavigationView) {
@@ -101,41 +93,179 @@ class PerfilFragment : Fragment() {
     private fun setupRecyclerViewCarroselPerfil() {
         val recyclerViewProdutosCarrosel = binding.rvlCarrosselPerfil
         recyclerViewProdutosCarrosel.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerViewProdutosCarrosel.setHasFixedSize(true)
 
         cardAdapterPerfil = context?.let { CardPerfilAdapter(it, listaCarrosselPerfil) }!!
         recyclerViewProdutosCarrosel.adapter = cardAdapterPerfil
+
+        cardAdapterPerfil.setOnItemClickListener { position ->
+
+            when (position) {
+                0 -> {
+                    // Navega para o fragmento de salvar vacinas
+                    val navController = findNavController()
+                    navController.navigate(R.id.action_mainFragment_to_saveVaccineFragment)
+                }
+
+                 1 -> {
+                    // Navega para o fragmento de salvar exames
+                     val navController = findNavController()
+                    navController.navigate(R.id.action_mainFragment_to_saveExamFragment)
+                }
+
+                2 -> {
+                    // Navega para o fragmento de salvar medicamentos
+                    val navController = findNavController()
+                    navController.navigate(R.id.action_mainFragment_to_saveMedicalFragment)
+                }
+
+                else -> {}
+            }
+        }
+
         getCardsCarroselPerfil()
     }
 
 
     private fun getCardsCarroselPerfil() {
         val cardOne = CarrosselPerfil(
-            2,
-            "Vacinas Salvas",
-            "• Vazio",
-            "• Vazio",
-            "",
+            0, "Vacinas Salvas", "• Teste",
             R.drawable.background_fundo_perfil_card_one,
             R.id.btnAddPerfilCard,
-            "Últimas Vacinas Salvas: "
+            "Últimas Vacinas Salvas: ",
+            count = 0 // Inicializa com 0, será atualizado depois
         )
 
         listaCarrosselPerfil.add(cardOne)
 
+        // Outros cards
         val cardTwo = CarrosselPerfil(
-            2,
-            "Exames Salvos",
+            0, "Exames Salvos",
             "• Vazio",
-            "• Vazio",
-            "",
-            R.drawable.background_fundo_perfil_card_two,
+            R.drawable.img_card_two_perfil,
             R.id.btnAddPerfilCard,
-            "Útimos Exames salvos: "
-
+            "Útimos Exames salvos:",
+            count = 0 // Inicializa com 0
         )
         listaCarrosselPerfil.add(cardTwo)
+
+        val cardThree = CarrosselPerfil(
+            0, "Medicamentos Salvos", "• Vazio",
+            R.drawable.img_card_three_perfil,
+            R.id.btnAddPerfilCard,
+            "Útimos Medicamentos salvos:",
+            count = 0 // Inicializa com 0
+        )
+        listaCarrosselPerfil.add(cardThree)
+
+        // Chama a função para buscar as vacinas salvas
+        fetchSavedVaccines(cardOne)
+        fetchSavedExams(cardTwo)
+        fetchSavedMedical(cardThree)
+    }
+
+    private fun fetchSavedVaccines(cardOne: CarrosselPerfil) {
+        val vaccinesRef = db.collection("vaccine") // Supondo que suas vacinas estão na coleção "notes"
+
+        vaccinesRef.whereEqualTo("userId", usuarioId).get()
+            .addOnSuccessListener { documents ->
+                val vaccineCount = documents.size()
+                var lastVaccineDate = "Nenhuma vacina salva"
+
+                if (vaccineCount > 0) {
+                    // Obtém a última vacina salva
+                    val lastVaccine = documents.documents.last()
+                    lastVaccineDate = lastVaccine.getString("title") ?: "Data desconhecida"
+                }
+
+                // Atualiza o card com a quantidade e a última vacina
+                cardOne.count = vaccineCount
+                cardOne.item1 = lastVaccineDate
+
+                // Atualiza o RecyclerView
+                cardAdapterPerfil.notifyDataSetChanged()
+            }
+            .addOnFailureListener { e ->
+                Log.e("PerfilFragment", "Erro ao buscar vacinas: ${e.message}")
+            }
+    }
+
+    private fun fetchSavedExams(cardTwo: CarrosselPerfil) {
+        val vaccinesRef = db.collection("exam") // Supondo que suas vacinas estão na coleção "notes"
+
+        vaccinesRef.whereEqualTo("userId", usuarioId).get()
+            .addOnSuccessListener { documents ->
+                val examCount = documents.size()
+                var lastExamDate = "Nenhuma Exame salva"
+
+                if (examCount > 0) {
+                    // Obtém a última vacina salva
+                    val lastVaccine = documents.documents.last()
+                    lastExamDate = lastVaccine.getString("title") ?: "Data desconhecida"
+                }
+
+                // Atualiza o card com a quantidade e a última vacina
+                cardTwo.count = examCount
+                cardTwo.item1 = lastExamDate
+
+                // Atualiza o RecyclerView
+                cardAdapterPerfil.notifyDataSetChanged()
+            }
+            .addOnFailureListener { e ->
+                Log.e("PerfilFragment", "Erro ao buscar Exames: ${e.message}")
+            }
+    }
+
+    private fun fetchSavedMedical(cardThree: CarrosselPerfil) {
+        val vaccinesRef = db.collection("medical") // Supondo que suas vacinas estão na coleção "notes"
+
+        vaccinesRef.whereEqualTo("userId", usuarioId).get()
+            .addOnSuccessListener { documents ->
+                val medicalCount = documents.size()
+                var lastMedicalDate = "Nenhum Medicamento salvo"
+
+                if (medicalCount > 0) {
+                    // Obtém a última vacina salva
+                    val lastVaccine = documents.documents.last()
+                    lastMedicalDate = lastVaccine.getString("title") ?: "Data desconhecida"
+                }
+
+                // Atualiza o card com a quantidade e a última vacina
+                cardThree.count = medicalCount
+                cardThree.item1 = lastMedicalDate
+
+                // Atualiza o RecyclerView
+                cardAdapterPerfil.notifyDataSetChanged()
+            }
+            .addOnFailureListener { e ->
+                Log.e("PerfilFragment", "Erro ao buscar Medicamentos: ${e.message}")
+            }
+    }
+
+    private fun updateVaccineInfo() {
+        val vaccinesRef = db.collection("vaccine") // Coleção de vacinas
+        vaccinesRef.whereEqualTo("userId", usuarioId).get()
+            .addOnSuccessListener { documents ->
+                val vaccineCount = documents.size()
+                var lastVaccineName = "Nenhuma vacina salva"
+
+                if (vaccineCount > 0) {
+                    // Obtém a última vacina salva
+                    val lastVaccine = documents.documents.last()
+                    lastVaccineName = lastVaccine.getString("title") ?: "Nome desconhecido"
+                }
+
+                // Atualiza o card de vacinas salvas
+                listaCarrosselPerfil[0].count = vaccineCount
+                listaCarrosselPerfil[0].ultimas = "Última vacina salva: $lastVaccineName"
+
+                // Notifica o adapter sobre a mudança
+                cardAdapterPerfil.notifyItemChanged(0)
+            }
+            .addOnFailureListener { e ->
+                Log.e("PerfilFragment", "Erro ao buscar vacinas: ${e.message}")
+            }
     }
 
     override fun onStart() {

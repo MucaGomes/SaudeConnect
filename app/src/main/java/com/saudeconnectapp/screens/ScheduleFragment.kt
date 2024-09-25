@@ -1,23 +1,20 @@
 package com.saudeconnectapp.screens
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.MetadataChanges
-import com.saudeconnectapp.MessageDialogFragment
+import com.saudeconnectapp.button_dialog_screens.MessageDialogFragment
 import com.saudeconnectapp.R
 import com.saudeconnectapp.adapters.ProfessionalAdaptaer
 import com.saudeconnectapp.databinding.FragmentScheduleBinding
-import com.saudeconnectapp.model.CarrosselPerfil
 import com.saudeconnectapp.model.PerfilProfessional
 class ScheduleFragment : Fragment() {
 

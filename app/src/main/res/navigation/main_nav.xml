@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/onboardingFragment"
-        android:name="com.saudeconnectapp.OnboardingFragment"
+        android:name="com.saudeconnectapp.onboarding_screen.OnboardingFragment"
         android:label="fragment_onboarding"
         tools:layout="@layout/fragment_onboarding">
         <action
@@ -36,8 +36,8 @@
             android:id="@+id/action_onboardingFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_onboardingFragment_to_homeLoginFragment"
-            app:destination="@id/homeLoginFragment" />
+            android:id="@+id/action_onboardingFragment_to_onboardingFourthFragment"
+            app:destination="@id/onboardingFourthFragment" />
     </fragment>
 
     <fragment
@@ -48,9 +48,6 @@
         <action
             android:id="@+id/action_homeFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_scheduleFragment"
-            app:destination="@id/scheduleFragment" />
         <action
             android:id="@+id/action_homeFragment_to_messageFragment"
             app:destination="@id/messageFragment" />
@@ -74,30 +71,8 @@
             android:id="@+id/action_perfilFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
         <action
-            android:id="@+id/action_perfilFragment_to_scheduleFragment"
-            app:destination="@id/scheduleFragment" />
-        <action
             android:id="@+id/action_perfilFragment_to_editPerfilFragment"
             app:destination="@id/editPerfilFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/scheduleFragment"
-        android:name="com.saudeconnectapp.screens.ScheduleFragment"
-        android:label="fragment_schedule"
-        tools:layout="@layout/fragment_schedule">
-        <action
-            android:id="@+id/action_scheduleFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_scheduleFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
-        <action
-            android:id="@+id/action_scheduleFragment_to_perfilFragment"
-            app:destination="@id/perfilFragment" />
-        <action
-            android:id="@+id/action_scheduleFragment_to_messageFragment"
-            app:destination="@id/messageFragment" />
     </fragment>
 
     <fragment
@@ -108,9 +83,6 @@
         <action
             android:id="@+id/action_mapFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
-        <action
-            android:id="@+id/action_mapFragment_to_scheduleFragment"
-            app:destination="@id/scheduleFragment" />
         <action
             android:id="@+id/action_mapFragment_to_messageFragment"
             app:destination="@id/messageFragment" />
@@ -131,9 +103,6 @@
             android:id="@+id/action_messageFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
         <action
-            android:id="@+id/action_messageFragment_to_scheduleFragment"
-            app:destination="@id/scheduleFragment" />
-        <action
             android:id="@+id/action_messageFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
@@ -142,18 +111,27 @@
         android:id="@+id/mainFragment"
         android:name="com.saudeconnectapp.screens.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_editPerfilFragment"
             app:destination="@id/editPerfilFragment" />
         <action
             android:id="@+id/action_mainFragment_to_sendPictureFragment"
             app:destination="@id/sendPictureFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_saveVaccineFragment"
+            app:destination="@id/saveVaccineFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_saveMedicalFragment"
+            app:destination="@id/saveMedicalFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_saveExamFragment"
+            app:destination="@id/saveExamFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.saudeconnectapp.LoginFragment"
+        android:name="com.saudeconnectapp.register_user.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -169,7 +147,7 @@
 
     <fragment
         android:id="@+id/singUpFragment"
-        android:name="com.saudeconnectapp.SingUpFragment"
+        android:name="com.saudeconnectapp.register_user.SingUpFragment"
         android:label="fragment_sing_up"
         tools:layout="@layout/fragment_sing_up">
         <action
@@ -182,7 +160,7 @@
 
     <fragment
         android:id="@+id/homeLoginFragment"
-        android:name="com.saudeconnectapp.HomeLoginFragment"
+        android:name="com.saudeconnectapp.register_user.HomeLoginFragment"
         android:label="fragment_home_login"
         tools:layout="@layout/fragment_home_login">
         <action
@@ -196,7 +174,7 @@
     <fragment
         android:id="@+id/editPerfilFragment"
         android:name="com.saudeconnectapp.screens.EditPerfilFragment"
-        android:label="EditPerfilFragment" >
+        android:label="EditPerfilFragment">
         <action
             android:id="@+id/action_editPerfilFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
@@ -212,7 +190,7 @@
         android:id="@+id/sendPictureFragment"
         android:name="com.saudeconnectapp.screens_send_picture.SendPictureFragment"
         android:label="fragment_send_picture"
-        tools:layout="@layout/fragment_send_picture" >
+        tools:layout="@layout/fragment_send_picture">
         <action
             android:id="@+id/action_sendPictureFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
@@ -223,4 +201,32 @@
         android:name="com.saudeconnectapp.edit_perfil_screens.EditPictureAvatarFragment"
         android:label="fragment_edit_picture_avatar"
         tools:layout="@layout/fragment_edit_picture_avatar" />
+    <fragment
+        android:id="@+id/onboardingFourthFragment"
+        android:name="com.saudeconnectapp.onboarding_screen.OnboardingFourthFragment"
+        android:label="fragment_onboarding_fourth"
+        tools:layout="@layout/fragment_onboarding_fourth" >
+        <action
+            android:id="@+id/action_onboardingFourthFragment_to_homeLoginFragment"
+            app:destination="@id/homeLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saveVaccineFragment"
+        android:name="com.saudeconnectapp.save_information_medical.SaveVaccineFragment"
+        android:label="fragment_saveaccine"
+        tools:layout="@layout/fragment_saveaccine" >
+        <action
+            android:id="@+id/action_saveVaccineFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saveExamFragment"
+        android:name="com.saudeconnectapp.save_information_medical.SaveExamFragment"
+        android:label="fragment_save_exam"
+        tools:layout="@layout/fragment_save_exam" />
+    <fragment
+        android:id="@+id/saveMedicalFragment"
+        android:name="com.saudeconnectapp.save_information_medical.SaveMedicalFragment"
+        android:label="fragment_save_medical"
+        tools:layout="@layout/fragment_save_medical" />
 </navigation>

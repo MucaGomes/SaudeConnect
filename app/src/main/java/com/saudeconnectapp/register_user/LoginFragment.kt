@@ -1,10 +1,7 @@
-package com.saudeconnectapp
+package com.saudeconnectapp.register_user
 
-import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +11,8 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.saudeconnectapp.R
 import com.saudeconnectapp.databinding.FragmentLoginBinding
-import com.saudeconnectapp.databinding.FragmentSingUpBinding
 
 
 class LoginFragment : Fragment() {

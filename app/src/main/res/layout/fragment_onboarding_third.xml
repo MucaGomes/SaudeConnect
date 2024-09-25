@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,7 +10,7 @@
     tools:context=".onboarding_screen.OnboardingThirdFragment">
 
     <TextView
-        android:id="@+id/txtFinish"
+        android:id="@+id/txtFinished"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
@@ -18,28 +18,53 @@
         android:fontFamily="@font/font_poppins"
         android:text="Finalizar"
         android:textColor="#A1A8B0"
-        android:textSize="17sp" />
-
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="310dp"
-        android:layout_height="310dp"
+        android:layout_width="400dp"
+        android:layout_height="350dp"
         android:layout_gravity="center"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/ob3" />
-
-    <TextView
-        android:id="@+id/txtOb1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#221F1F"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/font_poppins"
-        android:padding="25dp"
-        android:text="Encontre seus medicamentos perto de você"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:layout_marginBottom="150dp"
+        android:src="@drawable/img_doctors"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <TextView
+            android:id="@+id/txtOneOb1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/opens_sans"
+            android:text="Armazene com Tranquilidade!"
+            android:textColor="#221F1F"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/txtTwoOb1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:text="Gerencie seus documentos médicos do seu jeito"
+            android:textColor="#221F1F"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

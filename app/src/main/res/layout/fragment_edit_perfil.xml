@@ -13,7 +13,6 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@drawable/fundo_acard"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,63 +33,80 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="40dp"
-                android:fontFamily="@font/open_sans"
-                android:text="Editar Perfil"
-                android:textColor="#003049"
-                android:textSize="24dp"
-                android:textStyle="bold"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="60dp"
+                android:layout_margin="20dp"
+                android:id="@+id/view_logout"
+                android:layout_height="30dp"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/backToPerfil"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:text="Sair"
+                    android:layout_marginEnd="5dp"
+                    android:textColor="@color/red"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView12"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.545" />
+
+                <ImageView
+                    android:id="@+id/imageView12"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/img_logout"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <ImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/avatar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView">
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="25dp"
-                    android:src="@drawable/avatar"
-                    android:id="@+id/imgAvatar"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
+            <TextView
+                android:id="@+id/txtNameUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans"
+                android:text="Maria Elena"
+                android:textColor="#003049"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/imgAvatar"
+                app:layout_constraintStart_toStartOf="@+id/imgAvatar"
+                app:layout_constraintTop_toBottomOf="@+id/imgAvatar" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/open_sans"
-                        android:text="Maria Elena"
-                        android:textColor="#003049"
-                        android:id="@+id/txtNameUser"
-                        android:textSize="24dp"
-                        android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/imgEditPhotoPefil"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/img_edit_phot_perfil"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imgAvatar"
+                app:layout_constraintStart_toEndOf="@+id/imgAvatar"
+                app:layout_constraintTop_toTopOf="@+id/imgAvatar" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Alterar Foto"
-                        android:id="@+id/txtAlterarFoto"
-                        android:textColor="@color/red"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </GridLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
@@ -111,7 +127,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="20dp"
             android:id="@+id/cardAlterarSenha"
-            android:backgroundTint="#FACAC4"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="35dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -161,7 +177,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:id="@+id/cardEditarDados"
-            android:backgroundTint="#FACAC4"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="35dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -210,7 +226,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:backgroundTint="#FACAC4"
+            android:backgroundTint="@color/white"
             android:id="@+id/cardInfosClinicas"
             app:cardCornerRadius="35dp">
 
@@ -262,7 +278,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:id="@+id/cardCarteiraConvenio"
-            android:backgroundTint="#FACAC4"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="35dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -313,7 +329,7 @@
             android:layout_marginTop="20dp"
             android:id="@+id/cardCns"
             android:layout_marginEnd="20dp"
-            android:backgroundTint="#FACAC4"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="35dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -365,7 +381,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:textColor="#003049"
-            android:backgroundTint="#FACAC4"
+            android:backgroundTint="@color/white"
             android:text="Salvar"/>
 
 

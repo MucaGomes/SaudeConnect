@@ -1,4 +1,4 @@
-package com.saudeconnectapp
+package com.saudeconnectapp.button_dialog_screens
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.gms.tasks.Task
@@ -20,14 +19,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
-import com.saudeconnectapp.databinding.ScreenDialogCnsBinding
-import com.saudeconnectapp.databinding.ScreenNotificationListBinding
+import com.saudeconnectapp.FullScreenImageCnsActivity
+import com.saudeconnectapp.R
+import com.saudeconnectapp.databinding.ScreenDialogCarteiraConvenioBinding
 import jp.wasabeef.blurry.Blurry
 
 
-class CnsBottomSheetDialogFragment : BottomSheetDialogFragment() {
+class CardConvBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
-    private lateinit var binding: ScreenDialogCnsBinding
+    private lateinit var binding: ScreenDialogCarteiraConvenioBinding
     private var uriPictureCns: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
     private lateinit var auth: FirebaseAuth
@@ -41,7 +41,7 @@ class CnsBottomSheetDialogFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        binding = ScreenDialogCnsBinding.inflate(layoutInflater, container, false)
+        binding = ScreenDialogCarteiraConvenioBinding.inflate(layoutInflater, container, false)
 
 
         auth = FirebaseAuth.getInstance()
@@ -82,21 +82,20 @@ class CnsBottomSheetDialogFragment : BottomSheetDialogFragment() {
         val userId = auth.currentUser?.uid ?: return
         val storageRef = storage.reference
 
-        val uriCns = getPictureCns()
+        val uriCardConv = getPictureCns()
         val uploadTasks = mutableListOf<Task<*>>()
 
 
-        uriCns?.let { uri ->
-            val perfilRef = storageRef.child("fotosSus/$userId/sus.jpg")
-            val uploadTask = perfilRef.putFile(uri).addOnSuccessListener {
-                perfilRef.downloadUrl.addOnSuccessListener { url ->
-                    salvarUrlNoFirestore(url.toString(), "fotoSUSUrl")
-                }.addOnFailureListener { exception ->
-                    Log.e(
-                        "Firebase",
-                        "Erro ao obter URL da foto do cartão do SUS: ${exception.message}"
-                    )
+        uriCardConv?.let { uri ->
+            val cardVacRef = storageRef.child("fotosCardConv/$userId/cardConv.jpg")
+            val uploadTask = cardVacRef.putFile(uri).addOnSuccessListener {
+                cardVacRef.downloadUrl.addOnSuccessListener { url ->
+                    salvarUrlNoFirestore(url.toString(), "fotoCardConvUrl")
                 }
+            }.addOnFailureListener {
+
+                Log.e("Upload Error", "Erro ao fazer upload do cartão de vacinação", it)
+
             }.addOnFailureListener { exception ->
                 Log.e(
                     "Firebase",
@@ -167,7 +166,7 @@ class CnsBottomSheetDialogFragment : BottomSheetDialogFragment() {
         val userRef = db.collection("usuarios").document(userId)
 
         userRef.get().addOnSuccessListener { documentSnapshot ->
-            imageUrl = documentSnapshot.getString("fotoSUSUrl")
+            imageUrl = documentSnapshot.getString("fotoCardConvUrl")
             if (!imageUrl.isNullOrEmpty()) {
                 if (isAdded && view != null) {
                     Glide.with(requireContext()).load(imageUrl)
@@ -176,7 +175,7 @@ class CnsBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 }
             }
         }.addOnFailureListener {
-            Log.e("Firestore", "Erro ao carregar a imagem do CNS: ${it.message}")
+            Log.e("Firestore", "Erro ao carregar a imagem do CardVac: ${it.message}")
         }
     }
 

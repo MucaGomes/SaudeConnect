@@ -1,4 +1,4 @@
-package com.saudeconnectapp
+package com.saudeconnectapp.register_user
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.firestore.FirebaseFirestore
+import com.saudeconnectapp.R
 import com.saudeconnectapp.databinding.FragmentSingUpBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -59,7 +60,7 @@ class SingUpFragment : Fragment() {
 
         // função que faz voltar a tela de login
         btBack.setOnClickListener {
-                findNavController().navigate(R.id.action_singUpFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_singUpFragment_to_loginFragment)
         }
 
         val spinnerUF: Spinner = binding.spinnerUF
@@ -100,7 +101,14 @@ class SingUpFragment : Fragment() {
         return binding.root
     }
 
-    private fun validarCampos(email: String, pass: String, cpf: String, city: String, nasc: String, name: String): String? {
+    private fun validarCampos(
+        email: String,
+        pass: String,
+        cpf: String,
+        city: String,
+        nasc: String,
+        name: String
+    ): String? {
         return when {
             email.isBlank() -> "O campo de email está vazio!"
             pass.isBlank() -> "O campo de senha está vazio!"
@@ -133,7 +141,8 @@ class SingUpFragment : Fragment() {
                 firebaseAuth.createUserWithEmailAndPassword(email, pass)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(context, "Conta Criada Com Sucesso!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Conta Criada Com Sucesso!", Toast.LENGTH_SHORT)
+                                .show()
 
                             val usuariosMap = hashMapOf(
                                 "nome" to name,
@@ -151,6 +160,9 @@ class SingUpFragment : Fragment() {
                                 }.addOnFailureListener {
                                     Log.d("db", it.toString())
                                 }
+
+                            // Deslogar o usuário logo após a criação da conta
+                            firebaseAuth.signOut()
 
                             // Limpar os campos após cadastro
                             binding.txtEditEmail.setText("")

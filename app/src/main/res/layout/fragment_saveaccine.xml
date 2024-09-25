@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".save_information_medical.SaveVaccineFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_light"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="left"
+        android:layout_margin="5dp"
+        android:src="@drawable/back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar uma nova Vacina"
+        android:textSize="18sp"
+        android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp"
+        android:text="Nome da Vacina"/>
+
+    <Spinner
+        android:id="@+id/spinnerNameVaccine"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/button_login"
+        android:backgroundTint="#FEFBFB"
+        android:padding="2dp"
+        android:fontFamily="@font/opens_sans"
+        android:textStyle="bold"
+        android:textColorHint="#003049"
+        android:textColor="#000000"
+        android:textSize="11sp" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="2dp"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:text="Dose"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:text="Data Apliocação"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="2dp"
+        android:orientation="horizontal"
+        android:layout_height="80dp">
+
+        <Spinner
+            android:id="@+id/spinnerDose"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_login"
+            android:backgroundTint="#FEFBFB"
+            android:padding="2dp"
+            android:fontFamily="@font/opens_sans"
+            android:textStyle="bold"
+            android:textColorHint="#003049"
+            android:textColor="#000000"
+            android:textSize="11sp" />
+
+        <LinearLayout
+            android:id="@+id/boxEditDate"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="left"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/linear_layout_corner"
+            android:orientation="horizontal"
+            android:textColorHint="@color/black"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp">
+
+            <TextView
+                android:id="@+id/txtEditDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/opens_sans"
+                android:textStyle="bold"
+                android:textColorHint="#003049"
+                android:text="Data de Aplicação"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp"
+        android:text="Fabricante"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/boxEditManufacturer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:elevation="10dp"
+        android:hint="Ex: Fiocruz"
+        android:textColorHint="@color/black"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEditManufacturer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_login"
+            android:backgroundTint="#FEFBFB"
+            android:fontFamily="@font/opens_sans"
+            android:maxLines="1"
+            android:textColor="#000000"
+            android:textColorHint="#003049"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:text="Cidade"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:text="UF"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="80dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/boxEditCity"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:elevation="10dp"
+            android:textColorHint="@color/black"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEditCity"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/button_login"
+                android:backgroundTint="#FEFBFB"
+                android:fontFamily="@font/opens_sans"
+                android:textStyle="bold"
+                android:textColorHint="#003049"
+                android:maxLines="1"
+                android:textColor="#000000"
+                android:textSize="11sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/spinnerUf"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/button_login"
+            android:backgroundTint="#FEFBFB"
+            android:padding="2dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/opens_sans"
+            android:textStyle="bold"
+            android:textColorHint="#003049"
+            android:textColor="#000000"
+            android:textSize="11sp" />
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="Imagem da Nota"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/buttonChooseImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escolher Imagem" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_base"
+            android:layout_marginStart="10dp"
+            android:text="(OPICIONAL)"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/buttonSaveVaccine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar Vacina" />
+</LinearLayout>
+
+

@@ -22,26 +22,14 @@ class OnboardingThirdFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentOnboardingThirdBinding.inflate(layoutInflater, container, false)
 
-        val finish = binding.txtFinish
+        val finish = binding.txtFinished
 
         finish.setOnClickListener {
-            findNavController().navigate(R.id.action_onboardingFragment_to_homeLoginFragment)
-            onBoardingFinished()
+            findNavController().navigate(R.id.action_onboardingFragment_to_onboardingFourthFragment)
+
         }
 
         return binding.root
-    }
-
-    private fun onBoardingFinished() {
-
-        val sharedPreferences =
-            requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-
-        editor.putBoolean("finished", true)
-        editor.apply()
-
-
     }
 
 }

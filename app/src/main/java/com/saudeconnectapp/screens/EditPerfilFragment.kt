@@ -1,20 +1,16 @@
 package com.saudeconnectapp.screens
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.provider.Settings
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.Task
@@ -24,13 +20,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.MetadataChanges
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
-import com.saudeconnectapp.CardConvBottomSheetDialogFragment
-import com.saudeconnectapp.CnsBottomSheetDialogFragment
+import com.saudeconnectapp.MainActivity
 import com.saudeconnectapp.R
+import com.saudeconnectapp.button_dialog_screens.CardConvBottomSheetDialogFragment
+import com.saudeconnectapp.button_dialog_screens.CnsBottomSheetDialogFragment
 import com.saudeconnectapp.databinding.FragmentEditPerfilBinding
-import com.saudeconnectapp.databinding.ScreenDialogCnsBinding
 import jp.wasabeef.blurry.Blurry
-import java.util.jar.Manifest
 
 class EditPerfilFragment : Fragment() {
 
@@ -53,8 +48,13 @@ class EditPerfilFragment : Fragment() {
         storage = FirebaseStorage.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        binding.txtAlterarFoto.setOnClickListener {
+        binding.imgEditPhotoPefil.setOnClickListener {
             openGallery()
+        }
+
+        binding.viewLogout.setOnClickListener {
+            logout()
+            restartApp()
         }
 
         binding.backToPerfil.setOnClickListener {
@@ -92,12 +92,24 @@ class EditPerfilFragment : Fragment() {
         }
 
         binding.btnSalvar.setOnClickListener {
+            Toast.makeText(context, "Salvando informações...", Toast.LENGTH_SHORT).show()
             savePhoto()
         }
 
         return binding.root
     }
 
+    private fun restartApp() {
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        requireActivity().finish() // fecha a atividade atual
+    }
+
+    private fun logout() {
+        auth.signOut()
+
+    }
 
 
     private fun openGallery() {
@@ -124,6 +136,8 @@ class EditPerfilFragment : Fragment() {
             // Atualizar a imagem no ImageView com Glide
             uriFotoPerfil?.let { uri ->
                 Glide.with(this).load(uri).into(binding.imgAvatar)
+                // Após a seleção da imagem, já inicia o upload
+                savePhoto()  // Salva a foto logo após a seleção da galeria
             }
         }
     }
@@ -140,6 +154,12 @@ class EditPerfilFragment : Fragment() {
             val uploadTask = perfilRef.putFile(uri).addOnSuccessListener {
                 perfilRef.downloadUrl.addOnSuccessListener { url ->
                     salvarUrlNoFirestore(url.toString(), "fotoPerfilUrl")
+
+                    // Atualizar a imagem localmente após o upload
+                    context?.let {
+                        Glide.with(it).load(url).circleCrop() // Para manter a imagem redonda
+                            .into(binding.imgAvatar)
+                    }
                 }.addOnFailureListener { exception ->
                     Log.e("Firebase", "Erro ao obter URL da foto de perfil: ${exception.message}")
                 }
@@ -149,11 +169,11 @@ class EditPerfilFragment : Fragment() {
             uploadTasks.add(uploadTask)
         }
 
-        // Atualizar o campo fotosEnviadas no Firestore
         Tasks.whenAllComplete(uploadTasks).addOnCompleteListener {
             db.collection("usuarios").document(userId).update("fotosEnviadas", true)
                 .addOnSuccessListener {
-                    updateProfileCompleteStatus()
+                    Toast.makeText(context, "Informações atualizadas com sucesso!", Toast.LENGTH_SHORT)
+                        .show()
                 }.addOnFailureListener {
                     Log.e("Firestore Update Error", "Erro ao atualizar o status no Firestore", it)
                 }
@@ -162,7 +182,7 @@ class EditPerfilFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        loadUserAvatarPefil() // Ensure the photo is updated when the fragment resumes
+        loadUserAvatarPefil()
     }
 
 
@@ -171,7 +191,14 @@ class EditPerfilFragment : Fragment() {
         val userRef = db.collection("usuarios").document(userId)
         userRef.update("hasCompletedPhotoUpload", true).addOnSuccessListener {
             Toast.makeText(context, "Aguarde, enquanto atualizamos...", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_editPerfilFragment_to_mainFragment) // Atualizar para o nome correto do fragment
+
+            // Envia um sinal para a tela anterior atualizar a foto de perfil
+            val result = Bundle().apply {
+                putBoolean("profileUpdated", true)
+            }
+            setFragmentResult("profileUpdateKey", result) // Envia o resultado
+
+            findNavController().navigate(R.id.action_editPerfilFragment_to_mainFragment)
         }.addOnFailureListener { e ->
             Log.e("PhotoUpload", "Error updating document", e)
         }

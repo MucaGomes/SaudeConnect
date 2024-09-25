@@ -7,7 +7,7 @@
     android:layout_gravity="center_vertical"
     android:background="#F8F5EC"
     android:layout_height="match_parent"
-    tools:context=".OnboardingFragment">
+    tools:context=".onboarding_screen.OnboardingFragment">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
@@ -27,10 +27,11 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="100dp"
         app:dampingRatio="0.5"
-        app:dotsCornerRadius="20dp"
+        app:dotsCornerRadius="2dp"
         app:dotsSize="16dp"
         app:dotsSpacing="6dp"
         app:dotsStrokeWidth="2dp"
+        app:dotsColor="@color/colo_dark_blue"
         app:layout_constraintBottom_toBottomOf="@+id/view_pager"
         app:layout_constraintStart_toStartOf="parent"
         app:stiffness="300"/>

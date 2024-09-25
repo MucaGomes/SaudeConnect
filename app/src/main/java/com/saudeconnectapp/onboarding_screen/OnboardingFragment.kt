@@ -1,14 +1,12 @@
-package com.saudeconnectapp
+package com.saudeconnectapp.onboarding_screen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.saudeconnectapp.ViewPagerAdapter
 import com.saudeconnectapp.databinding.FragmentOnboardingBinding
-import com.saudeconnectapp.onboarding_screen.OnboardingFirstFragment
-import com.saudeconnectapp.onboarding_screen.OnboardingSecondFragment
-import com.saudeconnectapp.onboarding_screen.OnboardingThirdFragment
 
 class OnboardingFragment : Fragment() {
 

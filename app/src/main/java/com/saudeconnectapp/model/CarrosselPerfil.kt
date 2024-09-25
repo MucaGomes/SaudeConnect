@@ -2,13 +2,12 @@ package com.saudeconnectapp.model
 
 class CarrosselPerfil (
 
-    val count: Int? = null,
-    val title: String? = null,
-    val item1: String? = null,
-    val item2: String? = null,
-    val item3: String? = null,
-    val img: Int? = null,
-    val btn: Int? = null,
-    val ultimas: String? = null
+    val id: Int,
+    val title: String,
+    var item1: String,
+    val img: Int?,
+    val btnId: Int,
+    var ultimas: String,
+    var count: Int = 0 //
 
 )

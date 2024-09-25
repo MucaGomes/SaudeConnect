@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_light"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".save_information_medical.SaveMedicalFragment">
+
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="left"
+        android:layout_margin="5dp"
+        android:src="@drawable/back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Cadastrar um novo medicamento"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Nome do medicamento"
+        android:textSize="18sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:elevation="10dp"
+        android:textColorHint="@color/black"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        android:hint="Ex: Clonazepam 2mg"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEditTitleMedical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_login"
+            android:backgroundTint="#FEFBFB"
+            android:fontFamily="@font/opens_sans"
+            android:maxLines="1"
+            android:textColor="#000000"
+            android:textColorHint="#003049"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Dosagem"
+        android:textSize="18sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:elevation="10dp"
+        android:textColorHint="@color/black"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        android:hint="Ex: 2mg, 5mg"
+        app:boxCornerRadiusTopStart="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEditDose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_login"
+            android:backgroundTint="#FEFBFB"
+            android:fontFamily="@font/opens_sans"
+            android:maxLines="1"
+            android:textColor="#000000"
+            android:textColorHint="#003049"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Data de inicio de uso"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/boxEditDate"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/linear_layout_corner"
+        android:orientation="horizontal"
+        android:textColorHint="@color/black"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp">
+
+        <TextView
+            android:id="@+id/txtEditDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/opens_sans"
+            android:textColor="@color/black"
+            android:textColorHint="#003049"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Frequência de uso"
+        android:textSize="18sp" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/boxEditManufacturer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:elevation="10dp"
+        android:hint="Ex: 1x ao dia, antes de dormir"
+        android:textColorHint="@color/black"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEditFreq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_login"
+            android:backgroundTint="#FEFBFB"
+            android:fontFamily="@font/opens_sans"
+            android:maxLines="1"
+            android:textColor="#000000"
+            android:textColorHint="#003049"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Duração do Tratamento"
+        android:textSize="18sp" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:elevation="10dp"
+        android:hint="Ex: 3 meses"
+        android:textColorHint="@color/black"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEditDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_login"
+            android:backgroundTint="#FEFBFB"
+            android:fontFamily="@font/opens_sans"
+            android:maxLines="1"
+            android:textColor="#000000"
+            android:textColorHint="#003049"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="Imagem da Nota"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonChooseImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escolher Imagem" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="(OPICIONAL)"
+            android:textColor="@color/color_base" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonSaveMedical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar Medicamento" />
+</LinearLayout>
+
+
